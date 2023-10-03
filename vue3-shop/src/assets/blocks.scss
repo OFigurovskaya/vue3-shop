@@ -14,6 +14,7 @@
         -webkit-transition: all .3s;
         -moz-transition: all .3s;
         -o-transition: all .3s;
+        font-size: calc($sizeindex * 0.65);
     }
 
     &__link:focus-visible {
@@ -43,6 +44,7 @@
     transition: .3s color ease-in-out,
         .3s font-weight ease-in-out,
         .3s outline ease-in-out;
+        font-size: calc($sizeindex * 0.55);
 }
 
 .tel:focus-visible,
@@ -87,36 +89,69 @@
 }
 
 .title {
-    font-size: 55px;
+    font-size: calc($sizeindex * 2.13);
     font-weight: 600;
     line-height: 110%;
     letter-spacing: 1.1px;
 }
 
 .button {
-    padding: 22px 50px;
-    width: 45%;
+    padding: 2vh 1.5vw;
+    width: 15vw;
     position: relative;
     background-color: transparent;
     border: 1px solid $blue-color;
-    font-size: 17px;
+    font-size: calc($sizeindex * 0.6);
     font-style: normal;
     font-weight: 400;
     color: $blue-color;
+    text-align: center;
+    margin: 0 auto;
+    display: block;
     transition: .3s all ease-in-out;
 }
 
 .button:focus-visible {
     background-color: $focusLink-color;
     outline: none;
+    color: white;
 }
 
 .button:hover {
     background-color: $button-hover;
     outline: none;
+    color: white;
 }
 
 .button:active {
     background-color: $activeLink-color;
     outline: none;
+    color: white;
+}
+
+.titleTwo {
+    font-size: calc($sizeindex * 1.55);
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+}
+
+.mb-25 {
+    margin-bottom: 2.5vh;
+}
+
+.mb-8 {
+    margin-bottom: 8vh;
+}
+
+.priceBefore {
+    text-decoration: line-through;
+}
+
+.titleThree {
+    font-size: calc($sizeindex * 1);
+    font-style: normal;
+    font-weight: 500;
+    line-height: 140%;
+    letter-spacing: 0.5px;
 }

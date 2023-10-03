@@ -55,7 +55,7 @@
 
     &__menuDown {
         padding: 0;
-        font-size: 13px;
+        font-size: calc($sizeindex * 0.5);
     }
 
     &__linkDown {
@@ -118,12 +118,14 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 1%;
+        margin-bottom: 12vh;
     }
 
+    //up
     &__receiptLeft {
         display: flex;
         flex-direction: column;
-        padding: 29% 0;
+        padding: 16vh 0;
     }
 
     &__title {
@@ -133,7 +135,7 @@
     &__descr {
         width: 70%;
         text-align: right;
-        font-size: 20px;
+        font-size: calc($sizeindex * 0.77);
         font-style: normal;
         font-weight: 400;
         line-height: 140%;
@@ -144,7 +146,6 @@
     &__button {
         background-color: $blue-color;
         border: none;
-        translate: 55%;
         color: white;
     }
 
@@ -155,16 +156,142 @@
         padding: 2% 0;
     }
 
+    &__photoBig {
+        max-width: 75%;
+    }
 
     &__photoMiddle {
         position: relative;
+        max-width: 36%;
         left: -27%;
         top: -38%;
     }
 
     &__photoLittle {
         position: relative;
+        max-width: 36%;
         right: -20%;
         top: -93%;
+    }
+
+    //collection
+    &__collection {
+        margin-bottom: 12vh;
+    }
+
+    &__sliderList {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 2vw;
+        padding: 0;
+        margin-bottom: 4vh;
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__listImg {
+        width: 100%;
+        margin-bottom: 5vh;
+    }
+
+    &__listTitle {
+        font-size: calc($sizeindex * 0.75);
+        font-weight: 600;
+        line-height: 140%;
+        letter-spacing: 0.4px;
+        text-align: center;
+    }
+
+    &__price {
+        display: flex;
+        gap: 30px;
+        font-size: calc($sizeindex * 0.55);
+        font-style: normal;
+        font-weight: 500;
+        color: $price-color;
+    }
+
+    //important
+    &__important {
+        margin-bottom: 14vh;
+    }
+
+    &__important-list {
+        padding: 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 2vw;
+    }
+
+    &__important-img {
+        margin-bottom: 3vh;
+    }
+
+    &__important-descr {
+        width: 89%;
+        font-size: calc($sizeindex * 0.67);
+        font-style: normal;
+        font-weight: 500;
+        line-height: 140%;
+        letter-spacing: 0.34px;
+    }
+
+    //team
+    &__team {
+        margin-bottom: 20vh;
+    }
+
+    &__teamWrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 7.5vw;
+    }
+
+    &__teamWrapperPhoto {
+        max-width: 45vw;
+    }
+
+    &__teamWrapperDescr {
+        padding: 8vh 0;
+    }
+
+    &__teamWrapperText {
+        font-size: calc($sizeindex * 0.67);
+        font-style: normal;
+        font-weight: 500;
+        line-height: 140%;
+        letter-spacing: 0.34px;
+    }
+
+    &__href {
+        font-size: calc($sizeindex * 0.67);
+        font-style: normal;
+        font-weight: 500;
+        line-height: 140%;
+        letter-spacing: 0.34px;
+        color: $blue-color;
+        transition: .3s all ease-in-out;
+    }
+
+    &__href:focus-visible {
+        color: $focusLink-color;
+        outline: none;
+        border-bottom: 2px solid $focusLink-color;
+    }
+
+    &__href:hover {
+        color: $button-hover;
+        outline: none;
+        border-bottom: 2px solid $button-hover;
+    }
+
+    &__href:active {
+        color: $activeLink-color;
+        outline: none;
+        border-bottom: 2px solid $activeLink-color;
     }
 }

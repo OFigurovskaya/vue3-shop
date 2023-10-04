@@ -47,7 +47,7 @@ export default {
 
 <template>
     <Header />
-    <div class="mainPage container">
+    <main class="mainPage container">
         <div class="mainPage__receipt">
             <div class="mainPage__receiptLeft">
                 <h1 class="mainPage__title title">Новые поступления
@@ -134,6 +134,6 @@ export default {
                 </div>
             </div>
         </div>
-    </div>
+    </main>
     <Footer />
 </template>

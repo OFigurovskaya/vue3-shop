@@ -7,12 +7,7 @@ export default {
     name: 'MainPage',
     data() {
         return {
-            product1: [],
-            product2: [],
-            product3: [],
-            photo1: null,
-            photo2: null,
-            photo3: null,
+
         }
     },
     components: {
@@ -20,26 +15,11 @@ export default {
         Footer
     },
     mounted() {
-        axios
-            .get('https://vue-moire.skillbox.cc/api/products')
-            .then((response) => {
-                this.product1 = response.data.items[0];
-                this.product2 = response.data.items[1];
-                this.product3 = response.data.items[2];
-                this.photo1 = response.data.items[0].colors[0].gallery[0].file.url;
-                this.photo2 = response.data.items[1].colors[0].gallery[0].file.url;
-                this.photo3 = response.data.items[2].colors[0].gallery[0].file.url
-            })
+        this.$store.dispatch('GET_PRODUCT');
     },
     computed: {
-        sale1() {
-            return this.product1.price - Math.round(this.product1.price * 10 / 100);
-        },
-        sale2() {
-            return this.product2.price - Math.round(this.product2.price * 10 / 100);
-        },
-        sale3() {
-            return this.product3.price - Math.round(this.product3.price * 10 / 100);
+        productsList() {
+            return this.$store.getters.PRODUCTLIST.slice(0, 3);
         },
     }
 }
@@ -66,28 +46,12 @@ export default {
         <div class="mainPage__collection">
             <h2 class="titleTwo mb-8">Новая коллекция</h2>
             <ul class="mainPage__sliderList">
-                <li class="mainPage__item">
-                    <img :src="photo1" :alt="`${product1.title}`" class="mainPage__listImg">
-                    <h4 class="mainPage__listTitle">{{ product1.title }}</h4>
+                <li v-for="product in productsList" class="mainPage__item">
+                    <img :src="product.colors[0].gallery[0].file.url" :alt="product.title" class="mainPage__listImg">
+                    <h4 class="mainPage__listTitle">{{ product.title }}</h4>
                     <div class="mainPage__price">
-                        <p class="priceBefore">{{ product1.price }} ₽</p>
-                        <p class="pricenow">{{ sale1 }} ₽</p>
-                    </div>
-                </li>
-                <li class="mainPage__item">
-                    <img :src="photo2" :alt="`${product2.title}`" class="mainPage__listImg">
-                    <h4 class="mainPage__listTitle">{{ product2.title }}</h4>
-                    <div class="mainPage__price">
-                        <p class="priceBefore">{{ product2.price }} ₽</p>
-                        <p class="pricenow">{{ sale2 }} ₽</p>
-                    </div>
-                </li>
-                <li class="mainPage__item">
-                    <img :src="photo3" :alt="`${product3.title}`" class="mainPage__listImg">
-                    <h4 class="mainPage__listTitle">{{ product3.title }}</h4>
-                    <div class="mainPage__price">
-                        <p class="priceBefore">{{ product3.price }} ₽</p>
-                        <p class="pricenow">{{ sale3 }} ₽</p>
+                        <p class="priceBefore">{{ product.price }} ₽</p>
+                        <p class="pricenow">{{ product.price - Math.round(product.price * 10 / 100) }} ₽</p> 
                     </div>
                 </li>
             </ul>

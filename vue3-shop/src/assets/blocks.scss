@@ -44,7 +44,7 @@
     transition: .3s color ease-in-out,
         .3s font-weight ease-in-out,
         .3s outline ease-in-out;
-        font-size: calc($sizeindex * 0.55);
+    font-size: calc($sizeindex * 0.55);
 }
 
 .tel:focus-visible,
@@ -109,6 +109,7 @@
     margin: 0 auto;
     display: block;
     transition: .3s all ease-in-out;
+    cursor: pointer;
 }
 
 .button:focus-visible {
@@ -140,6 +141,14 @@
     margin-bottom: 2.5vh;
 }
 
+.mb-20 {
+    margin-bottom: 20vh;
+}
+
+.mt-8 {
+    margin-top: 8vh;
+}
+
 .mb-8 {
     margin-bottom: 8vh;
 }
@@ -154,4 +163,91 @@
     font-weight: 500;
     line-height: 140%;
     letter-spacing: 0.5px;
+}
+
+.breadcrumbs {
+    font-size: calc($sizeindex * 0.55);
+
+
+    &__main {
+        font-weight: 600;
+        transition: 0.3s all ease-in-out;
+    }
+
+    &__main:focus-visible {
+        color: $focusLink-color;
+        font-weight: 700;
+        outline: none;
+    }
+
+    &__main:hover {
+        color: $blue-color;
+        font-weight: 700;
+    }
+
+    &__main:active {
+        color: $activeLink-color;
+    }
+
+    &__products {
+        color: $grey-color;
+        transition: 0.3s all ease-in-out;
+    }
+
+    &__products:focus-visible {
+        color: $focusLink-color;
+        font-weight: 700;
+        outline: none;
+    }
+
+    &__products:hover {
+        color: $blue-color;
+        font-weight: 700;
+    }
+
+    &__products:active {
+        color: $activeLink-color;
+    }
+}
+
+.blockCenter {
+    margin: 0 auto;
+    display: block;
+}
+
+.breadcrumbsCard {
+    display: flex;
+}
+
+.cardproduct__filter-color input[type=radio] {
+    display: none;
+}
+
+.cardproduct__filter-color label {
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    padding-left: 25px;
+    margin-right: 0;
+    line-height: 18px;
+    user-select: none;
+}
+
+.cardproduct__filter-colorvalue:before {
+    content: "";
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: 0;
+    bottom: 1px;
+    border: 2px solid #000;
+    border-radius: 50%;
+    background-color: inherit;
+}
+
+.filter-wrapper {
+    display: flex;
+    width: 16vw;
+    justify-content: space-evenly;
 }

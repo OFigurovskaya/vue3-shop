@@ -295,3 +295,119 @@
         border-bottom: 2px solid $activeLink-color;
     }
 }
+
+//CatalogList
+.cataloglist {
+    &__filter-menu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1%;
+    }
+
+    &__filter-buttonAll {
+        background-color: #000;
+        color: white;
+        border-color: #000;
+    }
+
+    &__filter-button {
+        background-color: white;
+        color: #000;
+        border-color: #000;
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 2vw;
+        padding: 0;
+    }
+
+    &__item a {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 5vh;
+        align-items: center;
+        border: 2px solid #000;
+        border-radius: 3%;
+        height: 50vh;
+        transition: 0.3s all;
+    }
+
+    &__item a:focus-visible {
+        background-color: $focusLink-color;
+        border-color: $focusLink-color
+    }
+
+    &__item a:hover {
+        background-color: $button-hover;
+        border-color: $button-hover;
+    }
+
+    &__item a:active {
+        background-color: $activeLink-color;
+        border-color: $activeLink-color;
+    }
+
+    &__item-img {
+        width: 100%;
+        height: 38vh;
+        border-radius: 3% 3% 0 0;
+    }
+
+    &__item-title {
+        font-size: calc($sizeindex * 0.75);
+        font-weight: 600;
+        line-height: 140%;
+        letter-spacing: 0.4px;
+        text-align: center;
+    }
+
+    &__item-price {
+        display: flex;
+        gap: 30px;
+        font-size: calc($sizeindex * 0.55);
+        font-style: normal;
+        font-weight: 500;
+        color: $price-color;
+    }
+
+}
+
+//CardProduct
+.cardproduct {
+
+    &-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    &__img {
+        width: 33vw;
+        height: 650px;
+        border: 2px solid #000;
+        border-radius: 2%;
+    }
+
+    &__rightBlock {
+        padding: 7vh 4vw;
+    }
+
+    &__price {
+        display: flex;
+        justify-content: space-evenly;
+        font-size: 40px;
+        font-weight: 500;
+        line-height: 110%;
+        color: $price-color;
+        letter-spacing: 0.8px;
+    }
+
+    &__descr-title {
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 140%;
+        letter-spacing: 0.4px;
+    }
+}

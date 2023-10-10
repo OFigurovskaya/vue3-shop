@@ -3,17 +3,21 @@ import axios from 'axios';
 import Header from '../components/Header.vue';
 import Footer from '../components/Footer.vue';
 import BreadCrumbsCard from '../components/BreadCrumbsCard.vue';
+import { storeKey } from 'vuex';
 
 export default {
     name: 'CardProductPage',
     data() {
         return {
             productData: [],
+            productBasket: [],
             path: '/products',
             currentColor: 0,
             photos: [],
             currentSizes: 0,
             isLoading: false,
+            currentQuantity: 2,
+            colorId: []
         }
     },
     components: {
@@ -24,12 +28,14 @@ export default {
     mounted() {
         this.isLoading = true;
         setTimeout(() => {
-        axios
-            .get('https://vue-moire.skillbox.cc/api/products/' + this.$route.params.id)
-            .then(response => this.productData = response.data)
-            .catch(error => console.log(error.message))
+            axios
+                .get('https://vue-moire.skillbox.cc/api/products/' + this.$route.params.id)
+                .then(response => this.productData = response.data)
+                .catch(error => console.log(error.message))
             this.isLoading = false;
         }, 2000);
+        this.$store.dispatch('GET_BASKET');
+
     },
     computed: {
         sale() {
@@ -42,9 +48,17 @@ export default {
             for (let i = 0; i < this.photos.length; i++) {
                 return this.photos[0]
             }
-        }
+        },
+        basketProducts() {
+            return this.$store.getters.BASKETALL;
+        },
     },
-
+    methods: {
+        add(productId, colorId, sizeId, quantity) {
+            this.$store.commit('ADD_BASKET', { productId, colorId, sizeId, quantity })
+        }
+      
+    }
 
 }
 </script>
@@ -52,26 +66,30 @@ export default {
 <template>
     <Header />
 
-    <div class="load mb-25" v-if="this.isLoading">
-            <img src="../assets/img/spiral.gif" alt="" class="blockCenter">
-        </div>
 
-    <main class="cardproduct container"  v-if="!this.isLoading">
+    <div class="load mb-25" v-if="this.isLoading">
+        <img src="../assets/img/spiral.gif" alt="" class="blockCenter">
+    </div>
+
+    <main class="cardproduct container" v-if="!this.isLoading">
         <h1 class="cardproduct title mt-8 mb-25">{{ productData.title }}</h1>
 
         <BreadCrumbsCard :path="path" :name="productData.title" />
 
-       
-
         <div class="cardproduct-wrapper">
-
             <div class="cardproduct__leftBlock">
                 <template v-for="elem in productData.colors">
-                    <img :src="elem.gallery[0].file.url" :alt="productData.title" class="cardproduct__img"
-                        v-show="currentColor === elem.id">
+                    <div>
+                        <img :src="elem.gallery[0].file.url" :alt="productData.title" class="cardproduct__img"
+                            v-show="currentColor === elem.color.id">
+                    </div>
                 </template>
+
+
                 <img :src="photo1" :alt="productData.title" class="cardproduct__img" v-show="this.currentColor === 0">
             </div>
+
+
 
             <div class="cardproduct__rightBlock">
                 <div class="cardproduct__price mb-25">
@@ -84,11 +102,14 @@ export default {
                         <div class="cardproduct__filter-color" v-for="elem in productData.colors">
                             <label class="cardproduct__filter-colorlabel">
                                 <input class="cardproduct__filter-colorradio sr-only" type="radio" name="color-item"
-                                    :value="elem.id" v-model="currentColor" >
+                                    :value="elem.color.id" v-model="currentColor">
                                 <span class="cardproduct__filter-colorvalue"
                                     :style="`background-color: ${elem.color.code}`"></span>
                             </label>
+
                         </div>
+
+
                     </div>
                 </div>
                 <div class="cardproduct__descr ">
@@ -115,9 +136,18 @@ export default {
                         </div>
                     </div>
                 </div>
-            </div>
+                <div class="cardproduct__add ">
 
+                    <button class="cardproduct__add-button addButton"
+                        @click="add(this.productData.id, this.currentColor, this.currentSizes, this.currentQuantity)">
+                        В корзину
+                    </button>
+
+                    {{ basketProducts.length }}
+                </div>
+            </div>
         </div>
+
     </main>
 
     <Footer />

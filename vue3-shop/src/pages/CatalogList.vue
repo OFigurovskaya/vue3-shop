@@ -20,7 +20,6 @@ export default {
         productsCategory() {
             return this.$store.getters.PRODUCTSCATEGORY;
         },
-
     },
     mounted() {
         this.isLoading = true;

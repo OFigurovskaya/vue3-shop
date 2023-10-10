@@ -7,6 +7,8 @@ const store = createStore({
             productList: [],
             productsCategory: [],
             cardProducts: [],
+            productBasket: [],
+            addBasket: []
         }
     },
     getters: {
@@ -16,6 +18,10 @@ const store = createStore({
         PRODUCTSCATEGORY: state => {
             return state.productsCategory.slice(0, 5);
         },
+        BASKETALL: state => {
+            return state.productBasket;
+        },
+
     },
     mutations: {
         SET_PRODUCT: (state, payload) => {
@@ -27,7 +33,14 @@ const store = createStore({
         FILTER_PRODUCTS: async (state, id, payload) => {
             state.productList = await (await axios.get(`https://vue-moire.skillbox.cc/api/products?categoryId=${id}`)).data.items;
         },
-       
+        SET_BASKET: (state, payload) => {
+            state.productBasket = payload.data.items;
+        },
+        ADD_BASKET: async (state, { productId, colorId, sizeId, quantity }, payload) => {
+            state.addBasket =  await (await axios.post('https://vue-moire.skillbox.cc/api/baskets/products', { productId, colorId, sizeId, quantity })).data.items;
+            state.productBasket.push(state.addBasket)
+        }
+         
     },
     actions: {
         GET_PRODUCT: async (context, payload) => {
@@ -39,8 +52,15 @@ const store = createStore({
             let data = await axios.get('https://vue-moire.skillbox.cc/api/productCategories');
             context.commit('SET_CATEGORY', data);
         },
+
+        GET_BASKET: async (context, payload) => {
+            let data = await axios.get('https://vue-moire.skillbox.cc/api/baskets');
+            context.commit('SET_BASKET', data);
+        },
+
+       
         
-        
+
     }
 })
 

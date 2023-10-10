@@ -7,6 +7,11 @@ export default {
            
         }
     },
+    computed: {
+        basketProducts() {
+            return this.$store.getters.BASKETALL;
+        },
+    }
 }
 </script>
 
@@ -39,7 +44,7 @@ export default {
         </div>
 
         <div class="header__basket">
-            <router-link to="/baskets" class="basket"><img class="basketImg" src="../assets/img/shopping-bags 1.svg" alt=""></router-link>
+            <router-link to="/baskets" class="basket"><img class="basketImg" src="../assets/img/shopping-bags 1.svg" alt=""> {{basketProducts.length  }}</router-link>
             
         </div>
     </div>

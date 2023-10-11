@@ -411,5 +411,58 @@
         letter-spacing: 0.4px;
     }
 
+    &__quantity {
+        display: flex;
+    }
 
+    &__quantity-minus,
+    &__quantity-plus {
+        width: 5vw;
+    }
+
+    &__quantity-input {
+        width: 7vw;
+        text-align: center;
+    }
+}
+
+//BrandPage
+.brandpage {
+    margin-bottom: 3vh;
+
+    &__path-top,
+    &__path-bottom {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+        margin-bottom: 3vh;
+    }
+
+    &__path-bottom {
+        &-descr {
+            order: 1;
+            width: 80%;
+        }
+
+        &-img {
+            order: 2;
+        }
+    }
+
+    &__path-title {
+        font-size: 25px;
+        font-weight: 500;
+        line-height: 140%;
+        letter-spacing: 0.5px;
+        color: #000;
+        margin-bottom: 2vh;
+    }
+
+    &__path-text {
+        font-size: 17px;
+        font-weight: 500;
+        line-height: 140%;
+        letter-spacing: 0.34px;
+        color: #000;
+    }
 }

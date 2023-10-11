@@ -17,7 +17,8 @@ export default {
             currentSizes: 0,
             isLoading: false,
             currentQuantity: 2,
-            colorId: []
+            colorId: [],
+            isLoadingAdd: false
         }
     },
     components: {
@@ -55,9 +56,22 @@ export default {
     },
     methods: {
         add(productId, colorId, sizeId, quantity) {
-            this.$store.commit('ADD_BASKET', { productId, colorId, sizeId, quantity })
+            this.isLoadingAdd = true;
+            setTimeout(() => {
+                this.$store.commit('ADD_BASKET', { productId, colorId, sizeId, quantity })
+                this.isLoadingAdd = false;
+            }, 2000)
+        },
+        quantityPlus() {
+            this.currentQuantity++;
+        },
+        quantityMinus() {
+            if (this.currentQuantity > 0) {
+                this.currentQuantity--;
+            }
+
         }
-      
+
     }
 
 }
@@ -112,7 +126,7 @@ export default {
 
                     </div>
                 </div>
-                <div class="cardproduct__descr ">
+                <div class="cardproduct__descr mb-25">
                     <div class="cardproduct__filter mb-25">
                         <h4 class="cardproduct__descr-title mb-25"> Выберите размер::</h4>
                         <div class="filter-wrapper">
@@ -136,16 +150,34 @@ export default {
                         </div>
                     </div>
                 </div>
-                <div class="cardproduct__add ">
 
-                    <button class="cardproduct__add-button addButton"
+
+                <div class="cardproduct__add ">
+                    <div class="cardproduct__quantity mb-25">
+                        <button type="button" aria-label="Убрать один товар" class="cardproduct__quantity-minus button"
+                            @click="quantityMinus">-</button>
+                        <input class="cardproduct__quantity-input" type="text" name="quantity"
+                            v-model="this.currentQuantity">
+                        <button type="button" aria-label="Добавить один товар" class="cardproduct__quantity-plus button"
+                            @click="quantityPlus">+</button>
+                    </div>
+
+                    <button class="cardproduct__add-button addButton button"
                         @click="add(this.productData.id, this.currentColor, this.currentSizes, this.currentQuantity)">
                         В корзину
                     </button>
+                    <div class="loadAdd mb-25" v-if="this.isLoadingAdd">
+                        <p class="blockCenter">Товар добавляется в корзину...</p>
+                    </div>
 
-                    {{ basketProducts.length }}
                 </div>
             </div>
+
+
+
+
+
+
         </div>
 
     </main>

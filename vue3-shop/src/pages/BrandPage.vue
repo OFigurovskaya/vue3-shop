@@ -1,19 +1,19 @@
 <script>
 import Header from '../components/Header.vue';
 import Footer from '../components/Footer.vue';
-import BreadCrumbsCard from '../components/BreadCrumbsCard.vue';
+import BreadCrumbs from '../components/BreadCrumbs.vue';
 
 export default {
     name: 'BrandPage',
     data() {
         return {
-            path: '/products',
+            path: '/brand',
         }
     },
     components: {
         Header,
         Footer,
-        BreadCrumbsCard
+        BreadCrumbs
     }
 }
 </script>
@@ -22,7 +22,7 @@ export default {
     <Header />
     <main class="brandpage container">
         <h1 class="title mt-8 mb-25">О бренде</h1>
-        <BreadCrumbsCard :path="path" name="О бренде" />
+        <BreadCrumbs :path="path" name="О бренде" />
         <div class="brandpage__path-top mb-8">
             <img class="brandpage__path-top-img" src="@/assets/img/brand1.png" alt="">
             <div class="brandpage__path-top-descr">

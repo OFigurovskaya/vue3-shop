@@ -52,7 +52,7 @@ export default {
     <main class="cataloglist container">
         <h1 class="cataloglist__title title mt-8 mb-25">Магазин</h1>
 
-        <BreadCrumbs :path="path" />
+        <BreadCrumbs :path="path" name="Магазин" />
 
         <div class="cataloglist__filter mb-8">
             <ul class="cataloglist__filter-menu">

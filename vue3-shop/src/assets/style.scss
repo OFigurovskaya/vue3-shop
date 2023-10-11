@@ -450,7 +450,7 @@
     }
 
     &__path-title {
-        font-size: 25px;
+        font-size: calc($sizeindex * 0.7);
         font-weight: 500;
         line-height: 140%;
         letter-spacing: 0.5px;
@@ -459,10 +459,57 @@
     }
 
     &__path-text {
-        font-size: 17px;
+        font-size: calc($sizeindex * 0.55);
         font-weight: 500;
         line-height: 140%;
         letter-spacing: 0.34px;
         color: #000;
     }
 }
+
+//ContactsPage 
+.contacts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+
+    &__tel,
+    &__mail,
+    &__address {
+        p {
+            font-size: calc($sizeindex * 0.6);
+            font-style: normal;
+            font-weight: 500;
+            line-height: 140%;
+            letter-spacing: 0.34px;
+            color: #000;
+        }
+
+        a {
+            font-size: calc($sizeindex * 0.75);
+            font-style: normal;
+            font-weight: 500;
+            line-height: 140%;
+            letter-spacing: 0.4px;
+            color: #000;
+            transition: 0.3s all ease-in-out
+        }
+
+        a:focus-visible {
+            color: $focusLink-color;
+            font-weight: 700;
+            outline: none;
+        }
+
+        a:hover {
+            color: $blue-color;
+            font-weight: 700;
+        }
+
+        a:active {
+            color: $activeLink-color;
+        }
+    }
+    
+}
+

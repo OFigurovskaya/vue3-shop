@@ -56,7 +56,6 @@ export default {
             <router-link to="/baskets" class="basket"><img class="basketImg" src="../assets/img/shopping-bags 1.svg" alt=""> 
                 {{ productsBasket.length }}
             </router-link>
-            
         </div>
     </div>
 </template>

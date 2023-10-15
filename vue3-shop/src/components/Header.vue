@@ -1,4 +1,5 @@
 <script>
+import { mapState } from 'vuex'
 export default {
     name: 'Header',
     data() {
@@ -6,10 +7,19 @@ export default {
    
         }
     },
+    mounted() {
+        this.$store.commit('loadKey');
+        this.$store.dispatch('initBasket', this.key);
+    },
+
     computed: {
-        basketProducts() {
-            return this.$store.getters.BASKETALL.items;
-        },
+        ...mapState([
+            'productList',
+            'productsCategory',
+            'key',
+            'productsBasket',
+            'totalPrice',
+        ]),
     },
   
 }
@@ -22,6 +32,7 @@ export default {
             <img class="logo__img" src="@/assets/img/Womazing.svg">
         </div>
 
+       
         <div class="header__menu menu">
             <ul class="menu__list">
                 <li class="menu__item" >
@@ -46,7 +57,7 @@ export default {
 
         <div class="header__basket">
             <router-link to="/baskets" class="basket"><img class="basketImg" src="../assets/img/shopping-bags 1.svg" alt=""> 
-                <!-- {{ basketProducts.length }} -->
+                {{ productsBasket.length }}
             </router-link>
             
         </div>

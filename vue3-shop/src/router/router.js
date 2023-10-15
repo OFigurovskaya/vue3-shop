@@ -18,7 +18,7 @@ const router = createRouter({
         },
         {
             path: '/baskets',
-            name: 'basket',
+            name: 'baskets',
             component: BasketPage
         },
         {
@@ -47,7 +47,7 @@ const router = createRouter({
             component: NotFoundPage
         },
         {
-            path: '/order/:id',
+            path: '/order/',
             name: 'order',
             component: OrderPage
         },

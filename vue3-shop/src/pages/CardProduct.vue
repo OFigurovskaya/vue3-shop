@@ -3,7 +3,7 @@ import axios from 'axios';
 import Header from '../components/Header.vue';
 import Footer from '../components/Footer.vue';
 import BreadCrumbsCard from '../components/BreadCrumbsCard.vue';
-import { storeKey } from 'vuex';
+import { mapState } from 'vuex'
 
 export default {
     name: 'CardProductPage',
@@ -16,9 +16,10 @@ export default {
             photos: [],
             currentSizes: 0,
             isLoading: false,
-            currentQuantity: 2,
+            currentQuantity: 1,
             colorId: [],
-            isLoadingAdd: false
+            isLoadingAdd: false,
+
         }
     },
     components: {
@@ -26,19 +27,14 @@ export default {
         Footer,
         BreadCrumbsCard
     },
-    mounted() {
-        this.isLoading = true;
-        setTimeout(() => {
-            axios
-                .get('https://vue-moire.skillbox.cc/api/products/' + this.$route.params.id)
-                .then(response => this.productData = response.data)
-                .catch(error => console.log(error.message))
-            this.isLoading = false;
-        }, 2000);
-        this.$store.dispatch('GET_BASKET');
 
-    },
     computed: {
+        ...mapState([
+            'productList',
+            'productsCategory',
+            'key',
+            'productsBasket',
+        ]),
         sale() {
             return this.productData.price - Math.round(this.productData.price * 10 / 100)
         },
@@ -50,15 +46,33 @@ export default {
                 return this.photos[0]
             }
         },
-        basketProducts() {
-            return this.$store.getters.BASKETALL;
-        },
+        getKey() {
+            this.key = key
+        }
     },
+    mounted() {
+        this.isLoading = true;
+        setTimeout(() => {
+            axios
+                .get('https://vue-moire.skillbox.cc/api/products/' + this.$route.params.id)
+                .then(response => this.productData = response.data)
+                .catch(error => console.log(error.message))
+            this.isLoading = false;
+        }, 2000);
+        this.$store.commit('loadKey');
+        this.$store.dispatch('initBasket', this.key);
+    },
+
     methods: {
-        add(productId, colorId, sizeId, quantity) {
+        add(productId, colorId, sizeId, quantity, key) {
             this.isLoadingAdd = true;
+            if(localStorage.getItem('key')) {
+                key = localStorage.getItem('key')
+            } else {
+                key = this.$store.getters.KEY;
+            }
             setTimeout(() => {
-                this.$store.commit('ADD_BASKET', { productId, colorId, sizeId, quantity })
+                this.$store.dispatch('addBasket', { productId, colorId, sizeId, quantity, key })
                 this.isLoadingAdd = false;
             }, 2000)
         },
@@ -79,7 +93,6 @@ export default {
 
 <template>
     <Header />
-
 
     <div class="load mb-25" v-if="this.isLoading">
         <img src="../assets/img/spiral.gif" alt="" class="blockCenter">
@@ -163,7 +176,7 @@ export default {
                     </div>
 
                     <button class="cardproduct__add-button addButton button"
-                        @click="add(this.productData.id, this.currentColor, this.currentSizes, this.currentQuantity)">
+                        @click.prevent="add(this.productData.id, this.currentColor, this.currentSizes, this.currentQuantity)">
                         В корзину
                     </button>
                     <div class="loadAdd mb-25" v-if="this.isLoadingAdd">
@@ -172,11 +185,6 @@ export default {
 
                 </div>
             </div>
-
-
-
-
-
 
         </div>
 

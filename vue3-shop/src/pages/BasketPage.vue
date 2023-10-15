@@ -1,9 +1,85 @@
 <script>
+import Header from '../components/Header.vue';
+import Footer from '../components/Footer.vue';
+import BreadCrumbs from '../components/BreadCrumbs.vue';
+import { mapState } from 'vuex'
+
 export default {
-    name: 'BasketPage'
+    name: 'BasketPage',
+    data() {
+        return {
+            path: '/baskets',
+        }
+    },
+    components: {
+        Header,
+        Footer,
+        BreadCrumbs,
+    },
+    computed: {
+        ...mapState([
+            'productList',
+            'productsCategory',
+            'key',
+            'productsBasket',
+            'totalPrice',
+        ]),
+    },
+    mounted() {
+        this.$store.commit('loadKey');
+        this.$store.dispatch('initBasket', this.key);
+        this.$store.commit('totalPriceload')
+    },
+    methods: {
+        plus(id, num) {
+            this.$store.commit('plus', id, num);
+            this.$store.commit('totalPriceload')
+        },
+        minus(id, num) {
+            this.$store.commit('minus', id, num);
+            this.$store.commit('totalPriceload')
+        },
+        deleteProduct(id) {
+            this.$store.dispatch('basketDelete', id);
+            this.$store.commit('totalPriceload')
+        },
+    }
 }
 </script>
 
 <template>
-    BasketPage
+    <Header />
+    <main class="basketpage container">
+        <h1 class="basketpage__title title mt-8 mb-25">Корзина</h1>
+        <BreadCrumbs :path="path" name="Корзина" />
+
+        <div class="basketpage__list">
+            <div class="basketpage__item" v-for="(elem, index) in productsBasket">
+                <img :src="elem.color.gallery[0].file.url" :alt="elem.product.title" class="basketpage__item-img">
+                <h3 class="basketpage__item-title">{{ elem.product.title }}</h3>
+                <div class="basketpage__item-price">
+                    <p class="basketpage__item-priceBefore priceBefore"> {{ elem.product.price }} ₽</p>
+                    <p class="basketpage__item-priceAfter">сумма с учетом скидки 10%: </p>
+                    <p class="basketpage__item-priceAfter">
+                        {{ (elem.price * elem.quantity) -
+                            Math.round((elem.price * elem.quantity) * 10 / 100) }} ₽</p>
+                </div>
+                <div class="cardCount">
+                    Количество:
+                    <button type="button" aria-label="Убрать один товар" @click="minus(elem.id, elem.quantity)"
+                        class="cardCount__button button">-</button>
+                    <input type="text" name="quantity" v-model="elem.quantity" class="cardCount__input">
+                    <button type="button" aria-label="Добавить один товар" @click="plus(elem.id, elem.quantity)"
+                        class="cardCount__button button">+</button>
+                </div>
+
+                <button @click="deleteProduct(elem.id)" class="basketpage__item-buttonDelete button">Удалить товар</button>
+            </div>
+        </div>
+        <p class="basketpage__totalPrice">Итоговая сумма: {{ totalPrice }} ₽</p>
+
+        <router-link tag="button" to="order" class="basketpage__order button">заказать</router-link>
+
+    </main>
+    <Footer />
 </template>

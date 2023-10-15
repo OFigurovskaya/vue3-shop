@@ -2,12 +2,12 @@
 import Header from '../components/Header.vue';
 import Footer from '../components/Footer.vue';
 import axios from 'axios';
+import { mapState } from 'vuex'
 
 export default {
     name: 'MainPage',
     data() {
         return {
-
         }
     },
     components: {
@@ -15,13 +15,12 @@ export default {
         Footer
     },
     mounted() {
-        this.$store.dispatch('GET_PRODUCT');
+        this.$store.dispatch('initList');
     },
-    computed: {
-        productsList() {
-            return this.$store.getters.PRODUCTLIST.slice(0, 3);
-        },
-    }
+    computed:  
+    mapState([
+      'productList',
+    ]),
 }
 </script>
 
@@ -46,12 +45,12 @@ export default {
         <div class="mainPage__collection">
             <h2 class="titleTwo mb-8">Новая коллекция</h2>
             <ul class="mainPage__sliderList">
-                <li v-for="product in productsList" class="mainPage__item">
+                <li v-for="product in productList.slice(0, 3)" class="mainPage__item">
                     <img :src="product.colors[0].gallery[0].file.url" :alt="product.title" class="mainPage__listImg">
                     <h4 class="mainPage__listTitle">{{ product.title }}</h4>
                     <div class="mainPage__price">
                         <p class="priceBefore">{{ product.price }} ₽</p>
-                        <p class="pricenow">{{ product.price - Math.round(product.price * 10 / 100) }} ₽</p> 
+                        <p class="pricenow">{{ product.price - Math.round(product.price * 10 / 100) }} ₽</p>
                     </div>
                 </li>
             </ul>

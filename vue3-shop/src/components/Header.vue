@@ -3,15 +3,15 @@ export default {
     name: 'Header',
     data() {
         return {
-           
-           
+   
         }
     },
     computed: {
         basketProducts() {
-            return this.$store.getters.BASKETALL;
+            return this.$store.getters.BASKETALL.items;
         },
-    }
+    },
+  
 }
 </script>
 
@@ -24,17 +24,18 @@ export default {
 
         <div class="header__menu menu">
             <ul class="menu__list">
-                <li class="menu__item">
+                <li class="menu__item" >
                     <router-link to="/" class="menu__link">Главная</router-link>
+                    
                 </li>
                 <li class="menu__item">
-                    <router-link to="/products" class="menu__link">Магазин</router-link>
+                    <router-link to="/products" class="menu__link" >Магазин</router-link>
                 </li>
-                <li class="menu__item">
+                <li class="menu__item"  >
                     <router-link to="/brand" class="menu__link">О бренде</router-link>
                 </li>
                 <li class="menu__item">
-                    <router-link to="/contacts" class="menu__link">Конаткы</router-link>
+                    <router-link  to="/contacts" class="menu__link" >Конаткы</router-link>
                 </li>
             </ul>
         </div>
@@ -44,8 +45,16 @@ export default {
         </div>
 
         <div class="header__basket">
-            <router-link to="/baskets" class="basket"><img class="basketImg" src="../assets/img/shopping-bags 1.svg" alt=""> {{basketProducts.length  }}</router-link>
+            <router-link to="/baskets" class="basket"><img class="basketImg" src="../assets/img/shopping-bags 1.svg" alt=""> 
+                <!-- {{ basketProducts.length }} -->
+            </router-link>
             
         </div>
     </div>
 </template>
+
+<style>
+.activeList {
+    background-color: red;
+}
+</style>

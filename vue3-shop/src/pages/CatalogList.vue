@@ -3,6 +3,7 @@ import Header from '../components/Header.vue';
 import Footer from '../components/Footer.vue';
 import BreadCrumbs from '../components/BreadCrumbs.vue';
 import axios from 'axios';
+import { mapState } from 'vuex'
 
 export default {
     name: 'CatalogList',
@@ -11,31 +12,31 @@ export default {
             isLoading: false,
             path: '/products',
             productsAmount: 7,
+            currentId: -1
         }
     },
-    computed: {
-        productsList() {
-            return this.$store.getters.PRODUCTLIST;
-        },
-        productsCategory() {
-            return this.$store.getters.PRODUCTSCATEGORY;
-        },
-    },
+    computed:
+        mapState([
+            'productList',
+            'productsCategory',
+            'key',
+            'productsBasket'
+        ]),
     mounted() {
         this.isLoading = true;
         setTimeout(() => {
-            this.$store.dispatch('GET_PRODUCT');
-            this.$store.dispatch('GET_CATEGORY');
+            this.$store.dispatch('initList');
+            this.$store.dispatch('initCategory');
             this.isLoading = false;
         }, 2000);
     },
     methods: {
-        getFilter(id) {
-            this.$store.commit('FILTER_PRODUCTS', id)
+        filter(id) {
+            this.$store.dispatch('filterCategory', id)
+            if(this.productList.length === 14) {
+                return this.productList.slice(0, 13)
+            }
         },
-        reset() {
-            this.$store.dispatch('GET_PRODUCT');
-        }
     },
 
     components: {
@@ -48,7 +49,7 @@ export default {
 
 <template>
     <Header />
-   
+
     <main class="cataloglist container">
         <h1 class="cataloglist__title title mt-8 mb-25">Магазин</h1>
 
@@ -57,10 +58,13 @@ export default {
         <div class="cataloglist__filter mb-8">
             <ul class="cataloglist__filter-menu">
                 <li class="cataloglist__filter-item">
-                    <button class="cataloglist__filter-buttonAll button" @click="reset">Все</button>
+                    <button class="cataloglist__filter-buttonAll button" @click="filter(0), this.currentId = 0"
+                        :class="{ active: this.currentId === 0 }">Все</button>
                 </li>
                 <li class="cataloglist__filter-item" v-for="category in productsCategory" :key="category.id">
-                    <button class="cataloglist__filter-button button" @click="getFilter(category.id)">{{ category.title }}
+                    <button class="cataloglist__filter-button button"
+                        @click="filter(category.id), this.currentId = category.id"
+                        :class="{ active: category.id === this.currentId }">{{ category.title }}
                     </button>
                 </li>
             </ul>
@@ -71,7 +75,7 @@ export default {
             <img src="../assets/img/spiral.gif" alt="" class="blockCenter ">
         </div>
         <ul class="cataloglist__list">
-            <li class="cataloglist__item" v-for="product in this.productsList" :key="product.id">
+            <li class="cataloglist__item" v-for="product in productList" :key="product.id">
                 <router-link :to="{ name: 'card', params: { id: product.id } }" v-for="elem in product.colors[0].gallery"
                     title="Посмотреть товар">
                     <img class="cataloglist__item-img mb-25" alt="" :src="elem.file.url">
@@ -84,3 +88,13 @@ export default {
     </main>
     <Footer />
 </template>
+
+
+<style>
+.active {
+    background-color: #000;
+    color: white;
+    border-color: #000;
+}
+</style>
+

@@ -11,7 +11,6 @@ export default {
         this.$store.commit('loadKey');
         this.$store.dispatch('initBasket', this.key);
     },
-
     computed: {
         ...mapState([
             'productList',
@@ -21,7 +20,6 @@ export default {
             'totalPrice',
         ]),
     },
-  
 }
 </script>
 
@@ -32,7 +30,6 @@ export default {
             <img class="logo__img" src="@/assets/img/Womazing.svg">
         </div>
 
-       
         <div class="header__menu menu">
             <ul class="menu__list">
                 <li class="menu__item" >

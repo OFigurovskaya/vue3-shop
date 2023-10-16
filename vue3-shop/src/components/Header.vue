@@ -8,7 +8,7 @@ export default {
         }
     },
     mounted() {
-        this.$store.commit('loadKey');
+        this.$store.dispatch('initKey');
         this.$store.dispatch('initBasket', this.key);
     },
     computed: {

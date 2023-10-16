@@ -279,3 +279,19 @@
     margin: 0 auto;
     margin-bottom: 5vh;
 }
+
+.cardCount {
+
+    &__button,
+    &__input {
+        width: 3vw;
+        padding: 1vh 1vw;
+        margin-bottom: 1vh;
+    }
+
+
+}
+
+.loadAdd {
+    text-align: center;
+}

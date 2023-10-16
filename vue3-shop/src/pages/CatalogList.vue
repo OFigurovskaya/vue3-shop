@@ -27,6 +27,7 @@ export default {
         setTimeout(() => {
             this.$store.dispatch('initList');
             this.$store.dispatch('initCategory');
+            this.$store.dispatch('initKey');
             this.isLoading = false;
         }, 2000);
     },

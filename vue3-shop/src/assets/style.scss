@@ -509,6 +509,7 @@
 
 //basket 
 .basketpage {
+
     &__item {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
@@ -516,6 +517,8 @@
         text-align: center;
         margin-bottom: 2vh;
         gap: 1vw;
+        background-color: $basket-color;
+        padding: 2%;
 
         &-img {
             width: 20vw;
@@ -523,5 +526,10 @@
             border-radius: 2%;
             overflow: hidden;
         }
+
+        &-priceAfter {
+            font-weight: 600;
+        }
     }
+
 }

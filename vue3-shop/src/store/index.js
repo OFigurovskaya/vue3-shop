@@ -13,7 +13,7 @@ const store = createStore({
             totalPrice: 0,
         }
     },
-       mutations: {
+    mutations: {
         loadlist(state, payload) {
             state.productList = payload.data.items.slice(0, 13);
         },
@@ -66,41 +66,58 @@ const store = createStore({
 
     actions: {
         initList: async (context) => {
-            let data = await axios.get('https://vue-moire.skillbox.cc/api/products');
+            let data = await axios.get('https://vue-moire.skillbox.cc/api/products')
+                .catch((error) => console.log(error.message));
             context.commit('loadlist', data);
         },
         initCategory: async (context) => {
-            let data = await axios.get('https://vue-moire.skillbox.cc/api/productCategories');
+            let data = await axios.get('https://vue-moire.skillbox.cc/api/productCategories')
+                .catch((error) => console.log(error.message));
             context.commit('loadCategory', data);
         },
         filterCategory: async (context, id) => {
-            let data = (await axios.get(`https://vue-moire.skillbox.cc/api/products?categoryId=${id}`));
+            let data = await axios.get(`https://vue-moire.skillbox.cc/api/products?categoryId=${id}`)
+                .catch((error) => console.log(error.message));
             context.commit('loadFilter', data);
         },
         initKey: async (context) => {
-            let data = await axios.get('https://vue-moire.skillbox.cc/api/users/accessKey');
+            let data = await axios.get('https://vue-moire.skillbox.cc/api/users/accessKey')
+                .catch((error) => console.log(error.message));;
             context.commit('loadKey', data)
         },
         initBasket: async (context, key) => {
-            let data = await axios.get(`https://vue-moire.skillbox.cc/api/baskets?userAccessKey=${key}`);
+            let data = await axios.get(`https://vue-moire.skillbox.cc/api/baskets?userAccessKey=${key}`)
+                .catch((error) => console.log(error.message));;
             context.commit('loadBasket', data)
         },
         initCardProduct: async (context, id) => {
-            let data = await axios.get(`https://vue-moire.skillbox.cc/api/products/${id}`);
+            let data = await axios.get(`https://vue-moire.skillbox.cc/api/products/${id}`)
+                .catch((error) => console.log(error.message));
             context.commit('loadCardProduct', data)
         },
         addBasket: async (context, { productId, colorId, sizeId, quantity, key }) => {
-            let data = ((await axios.post('https://vue-moire.skillbox.cc/api/baskets/products', { productId, colorId, sizeId, quantity }, { params: { userAccessKey: key } })));
-            context.commit('loadBasket', data);
+            let data = await axios.post('https://vue-moire.skillbox.cc/api/baskets/products', { productId, colorId, sizeId, quantity }, { params: { userAccessKey: key } })
+                .catch((error) => console.log(error.response.data.error.request));
+            if (data) {
+                document.querySelector('.okText').innerHTML = '';
+                document.querySelector('.errorText').innerHTML = '';
+                document.querySelector('.okText').innerHTML = 'Товар добавлен!';
+                context.commit('loadBasket', data);
+            } else {
+                document.querySelector('.errorText').innerHTML = '';
+                document.querySelector('.okText').innerHTML = '';
+                document.querySelector('.errorText').innerHTML = 'Вы не выбрали цвет или размер, товар не добавлен';
+            }
+
         },
         basketDelete: async (context, id) => {
-            console.log(context.state.key);
-            let data = await axios.request(`https://vue-moire.skillbox.cc/api/baskets/products?userAccessKey=${ context.state.key }`, {
+            let data = await axios.request(`https://vue-moire.skillbox.cc/api/baskets/products?userAccessKey=${context.state.key}`, {
                 data: {
                     basketItemId: id
                 },
                 method: 'delete'
             })
+                .catch((error) => console.log(error.message));
             context.commit('loadBasket', data);
         },
     },

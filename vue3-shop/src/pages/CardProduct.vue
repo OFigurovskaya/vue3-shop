@@ -19,7 +19,6 @@ export default {
             currentQuantity: 1,
             colorId: [],
             isLoadingAdd: false,
-
         }
     },
     components: {
@@ -66,7 +65,7 @@ export default {
     methods: {
         add(productId, colorId, sizeId, quantity, key) {
             this.isLoadingAdd = true;
-            if(localStorage.getItem('key')) {
+            if (localStorage.getItem('key')) {
                 key = localStorage.getItem('key')
             } else {
                 key = this.$store.getters.KEY;
@@ -83,8 +82,7 @@ export default {
             if (this.currentQuantity > 0) {
                 this.currentQuantity--;
             }
-
-        }
+        },
 
     }
 
@@ -141,7 +139,7 @@ export default {
                 </div>
                 <div class="cardproduct__descr mb-25">
                     <div class="cardproduct__filter mb-25">
-                        <h4 class="cardproduct__descr-title mb-25"> Выберите размер::</h4>
+                        <h4 class="cardproduct__descr-title mb-25"> Выберите размер:</h4>
                         <div class="filter-wrapper">
                             <div class="cardproduct__filter-sizes" v-for="elem in productData.sizes">
                                 <label class="cardproduct__filter-sizeslabel">
@@ -176,11 +174,14 @@ export default {
                     </div>
 
                     <button class="cardproduct__add-button addButton button"
-                        @click.prevent="add(this.productData.id, this.currentColor, this.currentSizes, this.currentQuantity)">
+                        @click.prevent="add(this.productData.id, this.currentColor, this.currentSizes, this.currentQuantity)"
+                        :disabled="isLoadingAdd">
                         В корзину
                     </button>
-                    <div class="loadAdd mb-25" v-if="this.isLoadingAdd">
-                        <p class="blockCenter">Товар добавляется в корзину...</p>
+                    <div class="loadAdd mb-25">
+                        <p class="blockCenter" v-if="this.isLoadingAdd">Товар добавляется в корзину...</p>
+                        <p class="errorText" ></p>
+                        <p class="okText"></p>
                     </div>
 
                 </div>

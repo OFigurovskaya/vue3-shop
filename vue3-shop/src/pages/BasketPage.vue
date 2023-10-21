@@ -9,7 +9,6 @@ export default {
     data() {
         return {
             path: '/baskets',
-            isLoading: false
         }
     },
     components: {
@@ -24,16 +23,13 @@ export default {
             'key',
             'productsBasket',
             'totalPrice',
+            'isLoading'
         ]),
     },
     mounted() {
-        this.isLoading = true;
-        setTimeout(() => {
         this.$store.commit('loadKey');
         this.$store.dispatch('initBasket', this.key);
         this.$store.commit('totalPriceload')
-        this.isLoading = false;
-        }, 2000);
     },
     methods: {
         plus(id, num) {
@@ -62,7 +58,7 @@ export default {
             <img src="../assets/img/spiral.gif" alt="" class="blockCenter ">
         </div>
 
-        <div class="basketpage__list">
+        <div class="basketpage__list" v-if="!this.isLoading">
             <div class="basketpage__item" v-for="(elem, index) in productsBasket">
                 <img :src="elem.color.gallery[0].file.url" :alt="elem.product.title" class="basketpage__item-img">
                 <h3 class="basketpage__item-title">{{ elem.product.title }}</h3>

@@ -11,6 +11,10 @@ const store = createStore({
             cardProduct: [],
             addBasketArr: [],
             totalPrice: 0,
+            delivery: [],
+            payments: [],
+            orderInfo: null,
+            isLoading: false,
         }
     },
     mutations: {
@@ -50,7 +54,6 @@ const store = createStore({
                     if (elem.quantity > 0) {
                         elem.quantity--;
                     }
-
                 }
             }
         },
@@ -62,13 +65,30 @@ const store = createStore({
             }
             state.totalPrice = sum
         },
+
+        loadDelivery(state, payload) {
+            state.delivery = payload.data
+        },
+
+        loadPayments(state, payload) {
+            state.payments = payload.data
+        },
+
+        updateOrderInfo(state, orderInfo) {
+            state.orderInfo = orderInfo;
+          },
+
     },
 
     actions: {
         initList: async (context) => {
-            let data = await axios.get('https://vue-moire.skillbox.cc/api/products')
-                .catch((error) => console.log(error.message));
-            context.commit('loadlist', data);
+            context.state.isLoading = true;
+            setTimeout(async () => {
+                let data = await axios.get('https://vue-moire.skillbox.cc/api/products')
+                    .catch((error) => console.log(error.message));
+                context.commit('loadlist', data);
+                context.state.isLoading = false;
+            }, 2000);
         },
         initCategory: async (context) => {
             let data = await axios.get('https://vue-moire.skillbox.cc/api/productCategories')
@@ -81,14 +101,19 @@ const store = createStore({
             context.commit('loadFilter', data);
         },
         initKey: async (context) => {
+            context.state.isLoading = true;
+            setTimeout(async () => {
             let data = await axios.get('https://vue-moire.skillbox.cc/api/users/accessKey')
                 .catch((error) => console.log(error.message));;
             context.commit('loadKey', data)
+            context.state.isLoading = false;
+            }, 2000);
         },
         initBasket: async (context, key) => {
-            let data = await axios.get(`https://vue-moire.skillbox.cc/api/baskets?userAccessKey=${key}`)
-                .catch((error) => console.log(error.message));;
-            context.commit('loadBasket', data)
+                let data = await axios.get(`https://vue-moire.skillbox.cc/api/baskets?userAccessKey=${key}`)
+                    .catch((error) => console.log(error.message));
+                context.commit('loadBasket', data)
+                
         },
         initCardProduct: async (context, id) => {
             let data = await axios.get(`https://vue-moire.skillbox.cc/api/products/${id}`)
@@ -108,8 +133,8 @@ const store = createStore({
                 document.querySelector('.okText').innerHTML = '';
                 document.querySelector('.errorText').innerHTML = 'Вы не выбрали цвет или размер, товар не добавлен';
             }
-
         },
+
         basketDelete: async (context, id) => {
             let data = await axios.request(`https://vue-moire.skillbox.cc/api/baskets/products?userAccessKey=${context.state.key}`, {
                 data: {
@@ -120,6 +145,28 @@ const store = createStore({
                 .catch((error) => console.log(error.message));
             context.commit('loadBasket', data);
         },
+        initDelivery: async (context) => {
+            let data = await axios.get('https://vue-moire.skillbox.cc/api/deliveries');
+            context.commit('loadDelivery', data)
+        },
+        initPayments: async (context) => {
+            let data = await axios.get('https://vue-moire.skillbox.cc/api/payments?deliveryTypeId=1')
+            context.commit('loadPayments', data)
+        },
+        loadOrderInfo(context, orderId) {
+            return axios
+            .get('https://vue-moire.skillbox.cc/api/orders/' + orderId, {
+              params: {
+                userAccessKey: context.state.key
+              }
+            })
+            .then(response => {
+              context.commit('updateOrderInfo', response.data);
+            })
+          },
+        
+        
+
     },
     getters: {
 

@@ -9,7 +9,7 @@ export default {
     name: 'CatalogList',
     data() {
         return {
-            isLoading: false,
+            // isLoading: false,
             path: '/products',
             productsAmount: 7,
             currentId: -1
@@ -20,16 +20,13 @@ export default {
             'productList',
             'productsCategory',
             'key',
-            'productsBasket'
+            'productsBasket',
+            'isLoading'
         ]),
     mounted() {
-        this.isLoading = true;
-        setTimeout(() => {
             this.$store.dispatch('initList');
             this.$store.dispatch('initCategory');
             this.$store.dispatch('initKey');
-            this.isLoading = false;
-        }, 2000);
     },
     methods: {
         filter(id) {
@@ -56,7 +53,7 @@ export default {
 
         <BreadCrumbs :path="path" name="Магазин" />
 
-        <div class="cataloglist__filter mb-8">
+        <div class="cataloglist__filter mb-8" v-if="!this.isLoading">
             <ul class="cataloglist__filter-menu">
                 <li class="cataloglist__filter-item">
                     <button class="cataloglist__filter-buttonAll button" @click="filter(0), this.currentId = 0"
@@ -75,7 +72,7 @@ export default {
         <div class="load mb-25" v-if="this.isLoading">
             <img src="../assets/img/spiral.gif" alt="" class="blockCenter ">
         </div>
-        <ul class="cataloglist__list">
+        <ul class="cataloglist__list" v-if="!this.isLoading">
             <li class="cataloglist__item" v-for="product in productList" :key="product.id">
                 <router-link :to="{ name: 'card', params: { id: product.id } }" v-for="elem in product.colors[0].gallery"
                     title="Посмотреть товар">

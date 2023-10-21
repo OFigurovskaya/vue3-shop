@@ -14,7 +14,7 @@
         -webkit-transition: all .3s;
         -moz-transition: all .3s;
         -o-transition: all .3s;
-        font-size: calc($sizeindex * 0.65);
+        font-size: calc($sizeindex * 0.55);
     }
 
     &__link:focus-visible {
@@ -44,7 +44,7 @@
     transition: .3s color ease-in-out,
         .3s font-weight ease-in-out,
         .3s outline ease-in-out;
-    font-size: calc($sizeindex * 0.55);
+    font-size: calc($sizeindex * 0.5);
 }
 
 .tel:focus-visible,

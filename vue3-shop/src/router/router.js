@@ -52,7 +52,7 @@ const router = createRouter({
             component: OrderPage
         },
         {
-            path: '/success',
+            path: '/success/:id',
             name: 'success',
             component: SuccessPage
         },

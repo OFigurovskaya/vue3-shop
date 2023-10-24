@@ -632,3 +632,19 @@
     }
 
 }
+
+//success
+.success {
+    &__titleOrder {
+        font-weight: 600;
+        margin-bottom: 3vh;
+    }
+
+    &__infoDetails p {
+        margin-bottom: 2vh;
+    }
+
+    &__end {
+        margin-bottom: 6vh;
+    }
+}

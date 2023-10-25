@@ -1,8 +1,14 @@
 @import './vars.scss';
 @import './blocks.scss';
+@import "media";
+
+body {
+    margin: 0 auto;
+}
 
 #app {
     background-color: none;
+    padding: 0;
 }
 
 .container {
@@ -646,5 +652,19 @@
 
     &__end {
         margin-bottom: 6vh;
+    }
+}
+
+//notpage
+
+.notpage {
+    height: 75vh;
+
+    &__title {
+        margin-bottom: 10vh;
+    }
+
+    &__href {
+        width: 30vw;
     }
 }

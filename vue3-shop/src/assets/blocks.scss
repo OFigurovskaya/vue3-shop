@@ -44,7 +44,7 @@
     transition: .3s color ease-in-out,
         .3s font-weight ease-in-out,
         .3s outline ease-in-out;
-    font-size: calc($sizeindex * 0.5);
+    font-size: calc($sizeindex * 0.45);
 }
 
 .tel:focus-visible,

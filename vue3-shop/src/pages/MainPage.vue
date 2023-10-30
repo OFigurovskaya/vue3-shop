@@ -3,29 +3,31 @@ import Header from '../components/Header.vue';
 import Footer from '../components/Footer.vue';
 import axios from 'axios';
 import { mapState } from 'vuex'
+import BurgerMenu from '../components/BurgerMenu.vue';
 
 export default {
     name: 'MainPage',
     data() {
         return {
+    
         }
     },
     components: {
         Header,
-        Footer
+        Footer,
     },
     mounted() {
-        this.$store.dispatch('initList');
+        this.$store.dispatch('initList'); 
     },
-    computed:  
-    mapState([
-      'productList',
-    ]),
+    computed:
+        mapState([
+            'productList',
+        ]),
 }
 </script>
 
-<template>
-    <Header />
+<template >
+    <Header  />
     <main class="mainPage container">
         <div class="mainPage__receipt">
             <div class="mainPage__receiptLeft">
@@ -100,3 +102,9 @@ export default {
     </main>
     <Footer />
 </template>
+
+<style>
+.displayNone {
+    display: none;
+}
+</style>

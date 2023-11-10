@@ -18,7 +18,12 @@ export default {
         window.removeEventListener('resize', this.changeSize);
     },
     created() {
-
+        if (window.innerWidth <= 767) {
+                this.isBurger = true
+            }
+            else {
+                this.isBurger = false
+            }
     },
     computed: {
         ...mapState([

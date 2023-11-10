@@ -6,6 +6,14 @@ export default {
             isBurger: false
         }
     },
+    created() {
+        if (window.innerWidth <= 767) {
+                this.isBurger = true
+            }
+            else {
+                this.isBurger = false
+            }
+    },
     mounted() {
         window.addEventListener('resize', this.changeSize);
     },

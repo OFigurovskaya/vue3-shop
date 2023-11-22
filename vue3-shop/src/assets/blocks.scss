@@ -110,6 +110,7 @@
     display: block;
     transition: .3s all ease-in-out;
     cursor: pointer;
+    box-shadow: 5px 5px 4px rgba(26, 77, 71, 0.2);
 }
 
 .button:focus-visible {

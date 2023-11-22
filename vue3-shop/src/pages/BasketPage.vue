@@ -63,7 +63,8 @@ export default {
                 <img :src="elem.color.gallery[0].file.url" :alt="elem.product.title" class="basketpage__item-img">
                 <h3 class="basketpage__item-title">{{ elem.product.title }}</h3>
                 <div class="basketpage__item-price">
-                    Общая сумма: 
+                    <p class="basketpage__item-priceAll">Цена за штуку: {{ elem.price }} ₽</p>
+                    Общая сумма до скидки: 
                     <p class="basketpage__item-priceBefore priceBefore"> {{ (elem.price * elem.quantity) }} ₽</p>
                     <p class="basketpage__item-priceAfterText">Общая сумма с учетом скидки 10%: </p>
                     <p class="basketpage__item-priceAfter">

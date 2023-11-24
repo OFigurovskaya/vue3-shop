@@ -39,9 +39,9 @@ export default {
     mounted() {
         this.$store.commit('loadKey');
         this.$store.dispatch('initBasket', this.key);
-        this.$store.commit('totalPriceload')
         this.$store.dispatch('initDelivery');
         this.$store.dispatch('initPayments');
+        this.$store.commit('totalPriceload')
 
     },
 
@@ -80,7 +80,6 @@ export default {
 
 <template>
     <Header />
-
 
 
     <main class="orderpage container">
@@ -132,7 +131,7 @@ export default {
                     </template>
                 </div>
             </div>
-            <div class="orderpage__order">
+            <div class="orderpage__order">Ваш заказ:
                 <div v-for="elem in productsBasket" class="orderpage__order-wrapper">
                     <p class="orderpage__order-name">{{ elem.product.title }}</p>
                     <p class="orderpage__order-price"> {{ elem.quantity }} шт</p>

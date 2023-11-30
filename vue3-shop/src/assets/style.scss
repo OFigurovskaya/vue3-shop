@@ -696,6 +696,8 @@ body {
     }
 }
 
+
+
 //notpage
 
 .notpage {
@@ -832,6 +834,16 @@ body {
     .orderpage__form {
         width: 20vw;
     }
+
+    .success__info,
+    .success__end {
+        font-size: calc($sizeindex * 0.6);
+    }
+
+    .success__href {
+        max-width: 20vw;
+        margin-bottom: 1vh;
+    }
 }
 
 @media (min-width: 1601px) and (max-width: 1920px) {
@@ -868,6 +880,11 @@ body {
 
     .orderpage__order {
         font-weight: 600;
+    }
+
+    .success__href {
+        width: 20vw;
+        margin-bottom: 1vh;
     }
 
 }
@@ -940,6 +957,11 @@ body {
     .basketpage__item-priceAll, .basketpage__item-priceBefore {
         margin-bottom: 1.5vh;
     }
+
+    .success__href {
+        width: 20vw;
+        margin-bottom: 1vh;
+    }
 }
 
 @media (min-width: 1024px) and (max-width: 1199px) {
@@ -1011,6 +1033,11 @@ body {
 
     .basketpage__item-buttonDelete {
        grid-column: 1/6;
+    }
+
+    .success__href {
+        width: 20vw;
+        margin-bottom: 1vh;
     }
 }
 
@@ -1146,6 +1173,11 @@ body {
 
     .orderpage__order-wrapper {
         width: 100%;
+    }
+
+    .success__href {
+        width: 25vw;
+        margin-bottom: 1vh;
     }
 
 }
@@ -1502,6 +1534,11 @@ body {
 
     .orderpage__order-wrapper {
         width: 100%;
+    }
+
+    .success__href {
+        width: 35vw;
+        margin-bottom: 1vh;
     }
 
 }
@@ -1915,5 +1952,28 @@ grid-template-columns: 1fr;
 
     .orderpage__button {
         width: 50%;
+    }
+
+    .mainPage__button {
+        width: 100%;
+    }
+
+    .cataloglist__filter-menu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1%;
+        flex-direction: column;
+    }
+    
+    .cataloglist__filter-buttonAll,
+    .cataloglist__filter-button,
+    .cardproduct__add-button {
+        width: 100%;
+    }
+
+    .success__href {
+        width: 100%;
+        margin-bottom: 1vh;
     }
 }

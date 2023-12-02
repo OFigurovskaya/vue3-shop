@@ -1,7 +1,7 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-    name: 'Header',
+    name: 'BaseHeader',
     data() {
         return {
             isBurger: false,

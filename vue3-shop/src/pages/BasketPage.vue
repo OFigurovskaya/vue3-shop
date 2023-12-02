@@ -1,6 +1,6 @@
 <script>
-import Header from '../components/Header.vue';
-import Footer from '../components/Footer.vue';
+import BaseHeader from '../components/BaseHeader.vue';
+import BaseFooter from '../components/BaseFooter.vue';
 import BreadCrumbs from '../components/BreadCrumbs.vue';
 import { mapState } from 'vuex'
 
@@ -12,8 +12,8 @@ export default {
         }
     },
     components: {
-        Header,
-        Footer,
+        BaseHeader,
+        BaseFooter,
         BreadCrumbs,
     },
     computed: {
@@ -49,7 +49,7 @@ export default {
 </script>
 
 <template>
-    <Header />
+    <BaseHeader />
     <main class="basketpage container">
         <h1 class="basketpage__title title mt-8 mb-25">Корзина</h1>
         <BreadCrumbs :path="path" name="Корзина" />
@@ -88,5 +88,5 @@ export default {
         <router-link tag="button" to="order" class="basketpage__order button">заказать</router-link>
 
     </main>
-    <Footer />
+    <BaseFooter />
 </template>

@@ -1,6 +1,6 @@
 <script>
-import Header from '../components/Header.vue';
-import Footer from '../components/Footer.vue';
+import BaseHeader from '../components/BaseHeader.vue';
+import BaseFooter from '../components/BaseFooter.vue';
 import BreadCrumbs from '../components/BreadCrumbs.vue';
 
 export default {
@@ -11,15 +11,15 @@ export default {
         }
     },
     components: {
-        Header,
-        Footer,
+        BaseHeader,
+        BaseFooter,
         BreadCrumbs
     }
 }
 </script>
 
 <template>
-    <Header />
+    <BaseHeader />
     <main class="brandpage container">
         <h1 class="title mt-8 mb-25">О бренде</h1>
         <BreadCrumbs :path="path" name="О бренде" />
@@ -56,4 +56,4 @@ export default {
     </div>
     <router-link to="/products" class="brandpage__button button" tag="button">Перейти в магазин</router-link>
 </main>
-<Footer /></template>
+<BaseFooter /></template>

@@ -1,6 +1,6 @@
 <script>
-import Header from '../components/Header.vue';
-import Footer from '../components/Footer.vue';
+import BaseHeader from '../components/BaseHeader.vue';
+import BaseFooter from '../components/BaseFooter.vue';
 import BreadCrumbs from '../components/BreadCrumbs.vue';
 import { yandexMap, ymapMarker } from 'vue-yandex-maps'
 
@@ -21,8 +21,8 @@ export default {
         }
     },
     components: {
-        Header,
-        Footer,
+        BaseHeader,
+        BaseFooter,
         BreadCrumbs,
         yandexMap,
         ymapMarker
@@ -32,7 +32,7 @@ export default {
 </script>
 
 <template>
-    <Header />
+    <BaseHeader />
     <main class="contactspage container">
 
         <h1 class="contactspage__title title mt-8 mb-25">Контакты</h1>
@@ -61,5 +61,5 @@ export default {
         </div>
 
     </main>
-    <Footer />
+    <BaseFooter />
 </template>

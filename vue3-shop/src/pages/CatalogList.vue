@@ -1,6 +1,6 @@
 <script>
-import Header from '../components/Header.vue';
-import Footer from '../components/Footer.vue';
+import BaseHeader from '../components/BaseHeader.vue';
+import BaseFooter from '../components/BaseFooter.vue';
 import BreadCrumbs from '../components/BreadCrumbs.vue';
 import axios from 'axios';
 import { mapState } from 'vuex'
@@ -38,15 +38,15 @@ export default {
     },
 
     components: {
-        Header,
-        Footer,
+        BaseHeader,
+        BaseFooter,
         BreadCrumbs
     },
 }
 </script>
 
 <template>
-    <Header />
+    <BaseHeader />
 
     <main class="cataloglist container">
         <h1 class="cataloglist__title title mt-8 mb-25">Магазин</h1>
@@ -84,7 +84,7 @@ export default {
         </ul>
         <button>x</button>
     </main>
-    <Footer />
+    <BaseFooter />
 </template>
 
 

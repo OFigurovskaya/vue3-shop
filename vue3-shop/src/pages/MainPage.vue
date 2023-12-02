@@ -1,6 +1,6 @@
 <script>
-import Header from '../components/Header.vue';
-import Footer from '../components/Footer.vue';
+import BaseHeader from '../components/BaseHeader.vue';
+import BaseFooter from '../components/BaseFooter.vue';
 import axios from 'axios';
 import { mapState } from 'vuex'
 import BurgerMenu from '../components/BurgerMenu.vue';
@@ -13,8 +13,8 @@ export default {
         }
     },
     components: {
-        Header,
-        Footer,
+        BaseHeader,
+        BaseFooter,
     },
     mounted() {
         this.$store.dispatch('initList'); 
@@ -27,7 +27,7 @@ export default {
 </script>
 
 <template >
-    <Header  />
+    <BaseHeader  />
     <main class="mainPage container">
         <div class="mainPage__receipt">
             <div class="mainPage__receiptLeft">
@@ -100,7 +100,7 @@ export default {
             </div>
         </div>
     </main>
-    <Footer />
+    <BaseFooter />
 </template>
 
 <style>

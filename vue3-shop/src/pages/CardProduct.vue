@@ -1,7 +1,7 @@
 <script>
 import axios from 'axios';
-import Header from '../components/Header.vue';
-import Footer from '../components/Footer.vue';
+import BaseHeader from '../components/BaseHeader.vue';
+import BaseFooter from '../components/BaseFooter.vue';
 import BreadCrumbsCard from '../components/BreadCrumbsCard.vue';
 import { mapState } from 'vuex'
 
@@ -22,8 +22,8 @@ export default {
         }
     },
     components: {
-        Header,
-        Footer,
+        BaseHeader,
+        BaseFooter,
         BreadCrumbsCard
     },
 
@@ -90,7 +90,7 @@ export default {
 </script>
 
 <template>
-    <Header />
+    <BaseHeader />
 
     <div class="load mb-25" v-if="this.isLoading">
         <img src="../assets/img/spiral.gif" alt="" class="blockCenter">
@@ -191,6 +191,6 @@ export default {
 
     </main>
 
-    <Footer />
+    <BaseFooter />
 </template>
 

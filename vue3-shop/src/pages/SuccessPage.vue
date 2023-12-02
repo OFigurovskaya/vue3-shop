@@ -1,7 +1,7 @@
 <script>
 import { mapState } from 'vuex'
-import Header from '../components/Header.vue';
-import Footer from '../components/Footer.vue';
+import BaseHeader from '../components/BaseHeader.vue';
+import BaseFooter from '../components/BaseFooter.vue';
 import BreadCrumbs from '../components/BreadCrumbs.vue';
 
 export default {
@@ -13,8 +13,8 @@ export default {
         }
     },
     components: {
-        Header,
-        Footer,
+        BaseHeader,
+        BaseFooter,
         BreadCrumbs,
     },
     computed: {
@@ -42,7 +42,7 @@ export default {
 </script>
 
 <template>
-    <Header />
+    <BaseHeader />
   
 
     <main class="success container">
@@ -69,5 +69,5 @@ export default {
         <p class="success__end">Благодарим Вас за заказ! Наш менеджер свяжется с Вами в течение 10 минут</p>
         <router-link to="/" tag="button" class="success__href button" >Венуться на главную страницу</router-link>
     </main>
-    <Footer />
+    <BaseFooter />
 </template>

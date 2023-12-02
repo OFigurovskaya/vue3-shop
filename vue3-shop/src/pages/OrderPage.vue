@@ -1,7 +1,7 @@
 <script>
 import { mapState } from 'vuex'
-import Header from '../components/Header.vue';
-import Footer from '../components/Footer.vue';
+import BaseHeader from '../components/BaseHeader.vue';
+import BaseFooter from '../components/BaseFooter.vue';
 import BreadCrumbs from '../components/BreadCrumbs.vue';
 import axios from 'axios';
 import SuccessPage from './SuccessPage.vue';
@@ -17,8 +17,8 @@ export default {
         }
     },
     components: {
-        Header,
-        Footer,
+        BaseHeader,
+        BaseFooter,
         BreadCrumbs,
         SuccessPage
     },
@@ -79,7 +79,7 @@ export default {
 </script>
 
 <template>
-    <Header />
+    <BaseHeader />
 
 
     <main class="orderpage container">
@@ -145,7 +145,7 @@ export default {
         <button class="orderpage__button button" @click="placeOrder">Оформить заказ</button>
         <p v-show="this.isOrder">Заказ оформляется...</p>
     </main>
-    <Footer />
+    <BaseFooter />
 </template>
 
 <style>

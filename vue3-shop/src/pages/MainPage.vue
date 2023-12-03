@@ -9,7 +9,7 @@ export default {
     name: 'MainPage',
     data() {
         return {
-    
+            indexPage: 1
         }
     },
     components: {
@@ -27,7 +27,7 @@ export default {
 </script>
 
 <template >
-    <BaseHeader  />
+    <BaseHeader  :indexPage="indexPage"/>
     <main class="mainPage container">
         <div class="mainPage__receipt">
             <div class="mainPage__receiptLeft">

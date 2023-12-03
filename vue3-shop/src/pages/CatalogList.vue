@@ -2,6 +2,7 @@
 import BaseHeader from '../components/BaseHeader.vue';
 import BaseFooter from '../components/BaseFooter.vue';
 import BreadCrumbs from '../components/BreadCrumbs.vue';
+import ProductFilters from '../components/ProductFilters.vue'
 import axios from 'axios';
 import { mapState } from 'vuex'
 
@@ -12,7 +13,8 @@ export default {
             // isLoading: false,
             path: '/products',
             productsAmount: 7,
-            currentId: -1
+            currentId: -1,
+            indexPage: 2
         }
     },
     computed:
@@ -40,13 +42,14 @@ export default {
     components: {
         BaseHeader,
         BaseFooter,
-        BreadCrumbs
+        BreadCrumbs,
+        ProductFilters
     },
 }
 </script>
 
 <template>
-    <BaseHeader />
+    <BaseHeader :indexPage="indexPage"/>
 
     <main class="cataloglist container">
         <h1 class="cataloglist__title title mt-8 mb-25">Магазин</h1>
@@ -66,6 +69,7 @@ export default {
                     </button>
                 </li>
             </ul>
+            <ProductFilters />
         </div>
 
 

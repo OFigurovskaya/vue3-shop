@@ -78,6 +78,15 @@ const store = createStore({
             state.orderInfo = orderInfo;
           },
 
+        loadFilterPrice(state, { from, to }) {
+                state.productList = state.productList.filter(elem => {
+                    if (elem.price >= from && elem.price <= to) {
+                        return elem
+                    }
+                })
+               
+        },
+
     },
 
     actions: {

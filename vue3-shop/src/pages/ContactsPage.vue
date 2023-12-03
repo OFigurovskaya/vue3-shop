@@ -9,6 +9,7 @@ export default {
     data() {
         return {
             path: '/contacts',
+            indexPage: 4,
             placemarks: [
                 {
                     coordinates: [54.8, 39.8],
@@ -32,7 +33,7 @@ export default {
 </script>
 
 <template>
-    <BaseHeader />
+    <BaseHeader :indexPage="indexPage"/>
     <main class="contactspage container">
 
         <h1 class="contactspage__title title mt-8 mb-25">Контакты</h1>

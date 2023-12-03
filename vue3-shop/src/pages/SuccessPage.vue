@@ -42,7 +42,7 @@ export default {
 </script>
 
 <template>
-    <BaseHeader />
+    <BaseHeader :path="path"/>
   
 
     <main class="success container">

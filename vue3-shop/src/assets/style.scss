@@ -313,6 +313,7 @@ body {
         flex-wrap: wrap;
         justify-content: center;
         gap: 1%;
+        margin-bottom: 2vh;
     }
 
     &__filter-button {
@@ -713,6 +714,38 @@ body {
         bottom: -70%;
     }
 }
+
+.activeList a {
+    color: $focusLink-color;
+    font-weight: 600;
+}
+
+.cataloglist__filter-price {
+    text-align: center;
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(0.2fr 1fr 0.2fr 1fr 0.6fr 0.6fr);
+
+    .titleThree {
+        grid-column: 1/7;
+        margin-bottom: 1.5vh;
+    }
+}
+
+.filter-price {
+    padding: 2%;
+    margin-bottom: 1vh;
+    text-align: left;
+    color: inherit;
+    border-color: inherit
+    
+}
+
+.filter-go,
+.filter-reset {
+    width: 10vw;
+}
+
 
 //media
 @media (min-width: 1921px) {

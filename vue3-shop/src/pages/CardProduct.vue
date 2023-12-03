@@ -19,6 +19,7 @@ export default {
             currentQuantity: 1,
             colorId: [],
             isLoadingAdd: false,
+            indexPage: 2
         }
     },
     components: {
@@ -90,7 +91,7 @@ export default {
 </script>
 
 <template>
-    <BaseHeader />
+    <BaseHeader :indexPage="indexPage"/>
 
     <div class="load mb-25" v-if="this.isLoading">
         <img src="../assets/img/spiral.gif" alt="" class="blockCenter">

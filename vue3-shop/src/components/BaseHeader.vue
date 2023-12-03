@@ -2,6 +2,7 @@
 import { mapState } from 'vuex'
 export default {
     name: 'BaseHeader',
+    props: ['indexPage'],
     data() {
         return {
             isBurger: false,
@@ -52,6 +53,7 @@ export default {
 </script>
 
 <template @resize="changeSize" >
+
     <div v-show="!this.isBurger">
         <div class="header container">
             <div class="header__logo logo">
@@ -61,17 +63,17 @@ export default {
 
             <div class="header__menu menu">
                 <ul class="menu__list">
-                    <li class="menu__item">
+                    <li class="menu__item" :class="{activeList: indexPage===1}">
                         <router-link to="/" class="menu__link">Главная</router-link>
 
                     </li>
-                    <li class="menu__item">
-                        <router-link to="/products" class="menu__link">Магазин</router-link>
+                    <li class="menu__item" :class="{activeList: indexPage===2}">
+                        <router-link to="/products" class="menu__link" >Магазин</router-link>
                     </li>
-                    <li class="menu__item">
+                    <li class="menu__item" :class="{activeList: indexPage===3}">
                         <router-link to="/brand" class="menu__link">О бренде</router-link>
                     </li>
-                    <li class="menu__item">
+                    <li class="menu__item" :class="{activeList: indexPage===4}">
                         <router-link to="/contacts" class="menu__link">Конаткы</router-link>
                     </li>
                 </ul>
@@ -132,10 +134,6 @@ export default {
 </template>
 
 <style>
-.activeList {
-    background-color: red;
-}
-
 .dispalyNone {
        display: none;
        transform: translateX(120%);

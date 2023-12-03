@@ -8,6 +8,7 @@ export default {
     data() {
         return {
             path: '/brand',
+            indexPage: 3
         }
     },
     components: {
@@ -19,7 +20,7 @@ export default {
 </script>
 
 <template>
-    <BaseHeader />
+    <BaseHeader :indexPage="indexPage"/>
     <main class="brandpage container">
         <h1 class="title mt-8 mb-25">О бренде</h1>
         <BreadCrumbs :path="path" name="О бренде" />

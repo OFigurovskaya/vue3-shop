@@ -9,6 +9,7 @@ export default {
     data() {
         return {
             path: '/baskets',
+            indexPage: 2
         }
     },
     components: {
@@ -49,7 +50,7 @@ export default {
 </script>
 
 <template>
-    <BaseHeader />
+    <BaseHeader :indexPage="indexPage"/>
     <main class="basketpage container">
         <h1 class="basketpage__title title mt-8 mb-25">Корзина</h1>
         <BreadCrumbs :path="path" name="Корзина" />

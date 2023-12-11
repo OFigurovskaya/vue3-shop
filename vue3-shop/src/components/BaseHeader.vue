@@ -55,13 +55,13 @@ export default {
 <template @resize="changeSize" >
 
     <div v-show="!this.isBurger">
-        <div class="header container">
+        <div class="header container" id="ancor">
             <div class="header__logo logo">
-                <img class="logo__img" src="@/assets/img/logo.svg">
-                <img class="logo__img" src="@/assets/img/Womazing.svg">
+                <img class="logo__img" src="../assets/img/logo.svg">
+                <img class="logo__img" src="../assets/img/Womazing.svg">
             </div>
 
-            <div class="header__menu menu">
+            <div class="header__menu menu" >
                 <ul class="menu__list">
                     <li class="menu__item" :class="{activeList: indexPage===1}">
                         <router-link to="/" class="menu__link">Главная</router-link>
@@ -81,13 +81,13 @@ export default {
 
 
             <div class="header__tel">
-                <a class="tel" href="tel:+74958235412"><img class="header__picTel" src="@/assets/img/telephone 1.svg">+7
+                <a class="tel" href="tel:+74958235412"><img class="header__picTel" src="@/assets/img/telephone1.svg">+7
                     (495)
                     823-54-12</a>
             </div>
 
             <div class="header__basket">
-                <router-link to="/baskets" class="basket"><img class="basketImg" src="../assets/img/shopping-bags 1.svg"
+                <router-link to="/baskets" class="basket"><img class="basketImg" src="@/assets/img/shopping-bags1.svg"
                         alt="">
                     {{ productsBasket.length }}
                 </router-link>
@@ -106,7 +106,7 @@ export default {
                 <img class="logo__img" src="@/assets/img/Womazing.svg">
             </div>
             <div class="header-burger__basket">
-                <router-link to="/baskets" class="basket"><img class="basketImg" src="../assets/img/shopping-bags 1.svg"
+                <router-link to="/baskets" class="basket"><img class="basketImg" src="@/assets/img/shopping-bags1.svg"
                         alt="">
                     {{ productsBasket.length }}
                 </router-link>

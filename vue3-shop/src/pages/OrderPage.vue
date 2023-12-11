@@ -5,6 +5,7 @@ import BaseFooter from '../components/BaseFooter.vue';
 import BreadCrumbs from '../components/BreadCrumbs.vue';
 import axios from 'axios';
 import SuccessPage from './SuccessPage.vue';
+import UpButton from '../components/UpButton.vue'
 
 export default {
     name: 'OrderPage',
@@ -20,7 +21,8 @@ export default {
         BaseHeader,
         BaseFooter,
         BreadCrumbs,
-        SuccessPage
+        SuccessPage,
+        UpButton
     },
     computed: {
         ...mapState([
@@ -42,9 +44,11 @@ export default {
         this.$store.dispatch('initDelivery');
         this.$store.dispatch('initPayments');
         this.$store.commit('totalPriceload')
-
+        window.addEventListener('scroll', this.onScroll);
     },
-
+    unmounted() {
+        window.removeEventListener('scroll', this.onScroll);
+    },
     methods: {
         placeOrder() {
             this.isOrder = true;
@@ -72,6 +76,13 @@ export default {
                     this.formErrorMessage = error.response.data.error.message;
                 });
         },
+        onScroll() {
+            if(window.pageYOffset > 400) {
+                document.querySelector('.upbutton').classList.remove('upbutton_none')
+            } else {
+                document.querySelector('.upbutton').classList.add('upbutton_none')
+            }
+        }
     },
 
 }
@@ -82,7 +93,7 @@ export default {
     <BaseHeader />
 
 
-    <main class="orderpage container">
+    <main class="orderpage container" @scroll="onScroll">
         <h1 class="orderpage__title title mt-8 mb-25">Оформление заказа</h1>
         <BreadCrumbs :path="path" name="Оформление заказа" />
         <div class="load mb-25" v-if="this.isLoading">
@@ -144,7 +155,9 @@ export default {
         </div>
         <button class="orderpage__button button" @click="placeOrder">Оформить заказ</button>
         <p v-show="this.isOrder">Заказ оформляется...</p>
+        <UpButton />
     </main>
+
     <BaseFooter />
 </template>
 

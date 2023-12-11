@@ -3,6 +3,7 @@ import BaseHeader from '../components/BaseHeader.vue';
 import BaseFooter from '../components/BaseFooter.vue';
 import BreadCrumbs from '../components/BreadCrumbs.vue';
 import { mapState } from 'vuex'
+import UpButton from '../components/UpButton.vue'
 
 export default {
     name: 'BasketPage',
@@ -16,6 +17,7 @@ export default {
         BaseHeader,
         BaseFooter,
         BreadCrumbs,
+        UpButton
     },
     computed: {
         ...mapState([
@@ -31,6 +33,10 @@ export default {
         this.$store.commit('loadKey');
         this.$store.dispatch('initBasket', this.key);
         this.$store.commit('totalPriceload')
+        window.addEventListener('scroll', this.onScroll);
+    },
+    unmounted() {
+        window.removeEventListener('scroll', this.onScroll);
     },
     methods: {
         plus(id, num) {
@@ -45,16 +51,23 @@ export default {
             this.$store.dispatch('basketDelete', id);
             this.$store.commit('totalPriceload')
         },
+        onScroll() {
+            if(window.pageYOffset > 400) {
+                document.querySelector('.upbutton').classList.remove('upbutton_none')
+            } else {
+                document.querySelector('.upbutton').classList.add('upbutton_none')
+            }
+        }
     }
 }
 </script>
 
 <template>
-    <BaseHeader :indexPage="indexPage"/>
-    <main class="basketpage container">
+    <BaseHeader :indexPage="indexPage" />
+    <main class="basketpage container" @scroll="onScroll">
         <h1 class="basketpage__title title mt-8 mb-25">Корзина</h1>
         <BreadCrumbs :path="path" name="Корзина" />
-        
+
         <div class="load mb-25" v-if="this.isLoading">
             <img src="../assets/img/spiral.gif" alt="" class="blockCenter ">
         </div>
@@ -65,7 +78,7 @@ export default {
                 <h3 class="basketpage__item-title">{{ elem.product.title }}</h3>
                 <div class="basketpage__item-price">
                     <p class="basketpage__item-priceAll">Цена за штуку: {{ elem.price }} ₽</p>
-                    Общая сумма до скидки: 
+                    Общая сумма до скидки:
                     <p class="basketpage__item-priceBefore priceBefore"> {{ (elem.price * elem.quantity) }} ₽</p>
                     <p class="basketpage__item-priceAfterText">Общая сумма с учетом скидки 10%: </p>
                     <p class="basketpage__item-priceAfter">
@@ -81,13 +94,14 @@ export default {
                         class="button cardCount__button">+</button>
                 </div>
 
-                <button @click="deleteProduct(elem.id)" class="button basketpage__item-buttonDelete button">Удалить товар</button>
+                <button @click="deleteProduct(elem.id)" class="button basketpage__item-buttonDelete button">Удалить
+                    товар</button>
             </div>
         </div>
         <p class="basketpage__totalPrice">Итоговая сумма: {{ totalPrice }} ₽</p>
 
         <router-link tag="button" to="order" class="basketpage__order button">заказать</router-link>
-
+        <UpButton />
     </main>
     <BaseFooter />
 </template>

@@ -4,6 +4,7 @@ import BaseFooter from '../components/BaseFooter.vue';
 import axios from 'axios';
 import { mapState } from 'vuex'
 import BurgerMenu from '../components/BurgerMenu.vue';
+import UpButton from '../components/UpButton.vue'
 
 export default {
     name: 'MainPage',
@@ -15,9 +16,23 @@ export default {
     components: {
         BaseHeader,
         BaseFooter,
+        UpButton
     },
     mounted() {
         this.$store.dispatch('initList'); 
+        window.addEventListener('scroll', this.onScroll);
+    },
+    unmounted() {
+        window.removeEventListener('scroll', this.onScroll);
+    },
+    methods: {
+        onScroll() {
+            if(window.pageYOffset > 400) {
+                document.querySelector('.upbutton').classList.remove('upbutton_none')
+            } else {
+                document.querySelector('.upbutton').classList.add('upbutton_none')
+            }
+        }
     },
     computed:
         mapState([
@@ -28,7 +43,7 @@ export default {
 
 <template >
     <BaseHeader  :indexPage="indexPage"/>
-    <main class="mainPage container">
+    <main class="mainPage container" @scroll="onScroll">
         <div class="mainPage__receipt">
             <div class="mainPage__receiptLeft">
                 <h1 class="mainPage__title title">Новые поступления
@@ -58,6 +73,7 @@ export default {
             </ul>
             <router-link to="/products" tag="button" class="button ">Открыть магазин</router-link>
         </div>
+
 
         <div class="mainPage__important">
             <h2 class="titleTwo mb-8">Что для нас важно</h2>
@@ -99,7 +115,9 @@ export default {
                 </div>
             </div>
         </div>
+        <UpButton />
     </main>
+  
     <BaseFooter />
 </template>
 

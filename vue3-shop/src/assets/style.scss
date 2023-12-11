@@ -738,13 +738,31 @@ body {
     text-align: left;
     color: inherit;
     border-color: inherit
-    
 }
 
 .filter-go,
 .filter-reset {
     width: 10vw;
 }
+
+.upbutton {
+    border: none;
+    cursor: pointer;
+    position: fixed;
+    top: 500px;
+
+    img {
+        width: 30px;
+        height: 30px;
+
+    }
+}
+
+.upbutton_none {
+    display: none;
+}
+
+
 
 
 //media

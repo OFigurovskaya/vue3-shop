@@ -15,6 +15,8 @@ const store = createStore({
             payments: [],
             orderInfo: null,
             isLoading: false,
+            limitPage: 3,
+            page: 1,
         }
     },
     mutations: {
@@ -93,19 +95,30 @@ const store = createStore({
         initList: async (context) => {
             context.state.isLoading = true;
             setTimeout(async () => {
-                let data = await axios.get('https://vue-moire.skillbox.cc/api/products')
+                let data = await axios.get(`https://vue-moire.skillbox.cc/api/products`)
                     .catch((error) => console.log(error.message));
                 context.commit('loadlist', data);
                 context.state.isLoading = false;
             }, 2000);
         },
+
+        // initList: async (context ) => {
+        //     context.state.isLoading = true;
+        //     setTimeout(async () => {
+        //         let data = await axios.get(`https://vue-moire.skillbox.cc/api/products?page=${context.state.page}&limit=${context.state.limitPage}`)
+        //             .catch((error) => console.log(error.message));
+        //         context.commit('loadlist', data);
+        //         context.state.isLoading = false;
+        //     }, 2000);
+        // },
+        
         initCategory: async (context) => {
             let data = await axios.get('https://vue-moire.skillbox.cc/api/productCategories')
                 .catch((error) => console.log(error.message));
             context.commit('loadCategory', data);
         },
         filterCategory: async (context, id) => {
-            let data = await axios.get(`https://vue-moire.skillbox.cc/api/products?categoryId=${id}`)
+            let data = await axios.get(`https://vue-moire.skillbox.cc/api/products?categoryId=${id}&limit=${context.state.limitPage}`)
                 .catch((error) => console.log(error.message));
             context.commit('loadFilter', data);
         },

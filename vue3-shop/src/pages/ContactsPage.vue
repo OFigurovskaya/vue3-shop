@@ -39,7 +39,7 @@ export default {
         <h1 class="contactspage__title title mt-8 mb-25">Контакты</h1>
         <BreadCrumbs :path="path" name="Контакты" />
 
-        <div class="map">
+        <div id="map">
             <yandexMap :coordinates="[55.685030569063066,37.537361499999996]" :zoom="14" style="width: 50vw; height: 600px;"
                 :cluster-options="{
                     1: { clusterDisableClickZoom: true }

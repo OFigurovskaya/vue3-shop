@@ -2,6 +2,7 @@
 import BaseHeader from '../components/BaseHeader.vue';
 import BaseFooter from '../components/BaseFooter.vue';
 import BreadCrumbs from '../components/BreadCrumbs.vue';
+import UpButton from '../components/UpButton.vue'
 
 export default {
     name: 'BrandPage',
@@ -14,14 +15,30 @@ export default {
     components: {
         BaseHeader,
         BaseFooter,
-        BreadCrumbs
-    }
+        BreadCrumbs,
+        UpButton
+    },
+    mounted() {
+        window.addEventListener('scroll', this.onScroll);
+    },
+    unmounted() {
+        window.removeEventListener('scroll', this.onScroll);
+    },
+    methods: {
+        onScroll() {
+            if(window.pageYOffset > 400) {
+                document.querySelector('.upbutton').classList.remove('upbutton_none')
+            } else {
+                document.querySelector('.upbutton').classList.add('upbutton_none')
+            }
+        }
+    },
 }
 </script>
 
 <template>
     <BaseHeader :indexPage="indexPage"/>
-    <main class="brandpage container">
+    <main class="brandpage container" @scroll="onScroll">
         <h1 class="title mt-8 mb-25">О бренде</h1>
         <BreadCrumbs :path="path" name="О бренде" />
         <div class="brandpage__path-top mb-8">
@@ -56,5 +73,6 @@ export default {
         </div>
     </div>
     <router-link to="/products" class="brandpage__button button" tag="button">Перейти в магазин</router-link>
+    <UpButton />
 </main>
 <BaseFooter /></template>

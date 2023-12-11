@@ -3,74 +3,69 @@ import BaseHeader from '../components/BaseHeader.vue';
 import BaseFooter from '../components/BaseFooter.vue';
 import BreadCrumbs from '../components/BreadCrumbs.vue';
 import ProductFilters from '../components/ProductFilters.vue'
+import BasePagination from '../components/BasePagination.vue';
 import axios from 'axios';
 import { mapState } from 'vuex'
+import UpButton from '../components/UpButton.vue'
 
 export default {
     name: 'CatalogList',
     data() {
         return {
-            // isLoading: false,
             path: '/products',
-            productsAmount: 7,
-            currentId: -1,
-            indexPage: 2
+            indexPage: 2,
         }
     },
-    computed:
-        mapState([
+    computed: {
+        ...mapState([
             'productList',
             'productsCategory',
             'key',
             'productsBasket',
-            'isLoading'
+            'isLoading',
+            'page',
         ]),
-    mounted() {
-            this.$store.dispatch('initList');
-            this.$store.dispatch('initCategory');
-            this.$store.dispatch('initKey');
-    },
-    methods: {
-        filter(id) {
-            this.$store.dispatch('filterCategory', id)
-            if(this.productList.length === 14) {
-                return this.productList.slice(0, 13)
-            }
-        },
+
     },
 
+    mounted() {
+        this.$store.dispatch('initList');
+        this.$store.dispatch('initCategory');
+        this.$store.dispatch('initKey');
+        window.addEventListener('scroll', this.onScroll);
+    },
+    unmounted() {
+        window.removeEventListener('scroll', this.onScroll);
+    },
     components: {
         BaseHeader,
         BaseFooter,
         BreadCrumbs,
-        ProductFilters
+        ProductFilters,
+        BasePagination,
+        UpButton
+    },
+    methods: {
+        onScroll() {
+            if(window.pageYOffset > 400) {
+                document.querySelector('.upbutton').classList.remove('upbutton_none')
+            } else {
+                document.querySelector('.upbutton').classList.add('upbutton_none')
+            }
+        }
     },
 }
 </script>
 
 <template>
-    <BaseHeader :indexPage="indexPage"/>
+    <BaseHeader :indexPage="indexPage" />
 
-    <main class="cataloglist container">
+    <main class="cataloglist container" @scroll="onScroll">
         <h1 class="cataloglist__title title mt-8 mb-25">Магазин</h1>
 
         <BreadCrumbs :path="path" name="Магазин" />
 
-        <div class="cataloglist__filter mb-8" v-if="!this.isLoading">
-            <ul class="cataloglist__filter-menu">
-                <li class="cataloglist__filter-item">
-                    <button class="cataloglist__filter-buttonAll button" @click="filter(0), this.currentId = 0"
-                        :class="{ active: this.currentId === 0 }">Все</button>
-                </li>
-                <li class="cataloglist__filter-item" v-for="category in productsCategory" :key="category.id">
-                    <button class="cataloglist__filter-button button"
-                        @click="filter(category.id), this.currentId = category.id"
-                        :class="{ active: category.id === this.currentId }">{{ category.title }}
-                    </button>
-                </li>
-            </ul>
-            <ProductFilters />
-        </div>
+        <ProductFilters />
 
 
         <div class="load mb-25" v-if="this.isLoading">
@@ -86,17 +81,11 @@ export default {
                 </router-link>
             </li>
         </ul>
-        <button>x</button>
+        <BasePagination  />
+        <UpButton />
     </main>
     <BaseFooter />
 </template>
 
 
-<style>
-.active {
-    background-color: #000;
-    color: white;
-    border-color: #000;
-}
-</style>
 

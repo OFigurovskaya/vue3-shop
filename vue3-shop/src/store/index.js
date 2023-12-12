@@ -40,6 +40,8 @@ const store = createStore({
         loadBasket(state, payload) {
             state.productsBasket = payload.data.items
         },
+
+        
         loadCardProduct(state, payload) {
             state.cardProduct = payload.data;
         },
@@ -60,12 +62,13 @@ const store = createStore({
             }
         },
 
-        totalPriceload(state) {
+         totalPriceload(state) {
             let sum = 0;
             for (let elem of state.productsBasket) {
                 sum += ((elem.price * elem.quantity) - Math.round((elem.price * elem.quantity) * 10 / 100));
             }
-            state.totalPrice = sum
+            state.totalPrice = sum;
+            return  state.totalPrice;
         },
 
         loadDelivery(state, payload) {
@@ -140,7 +143,8 @@ const store = createStore({
         initCardProduct: async (context, id) => {
             let data = await axios.get(`https://vue-moire.skillbox.cc/api/products/${id}`)
                 .catch((error) => console.log(error.message));
-            context.commit('loadCardProduct', data)
+            context.commit('loadCardProduct', data);
+            
         },
         addBasket: async (context, { productId, colorId, sizeId, quantity, key }) => {
             let data = await axios.post('https://vue-moire.skillbox.cc/api/baskets/products', { productId, colorId, sizeId, quantity }, { params: { userAccessKey: key } })
@@ -166,6 +170,7 @@ const store = createStore({
             })
                 .catch((error) => console.log(error.message));
             context.commit('loadBasket', data);
+            context.commit('totalPriceload')
         },
         initDelivery: async (context) => {
             let data = await axios.get('https://vue-moire.skillbox.cc/api/deliveries');

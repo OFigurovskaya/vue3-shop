@@ -10,7 +10,7 @@ export default {
     data() {
         return {
             path: '/baskets',
-            indexPage: 2
+            indexPage: 2,
         }
     },
     components: {
@@ -30,9 +30,9 @@ export default {
         ]),
     },
     mounted() {
+        this.$store.commit('totalPriceload')
         this.$store.commit('loadKey');
         this.$store.dispatch('initBasket', this.key);
-        this.$store.commit('totalPriceload')
         window.addEventListener('scroll', this.onScroll);
     },
     unmounted() {
@@ -52,7 +52,7 @@ export default {
             this.$store.commit('totalPriceload')
         },
         onScroll() {
-            if(window.pageYOffset > 400) {
+            if (window.pageYOffset > 400) {
                 document.querySelector('.upbutton').classList.remove('upbutton_none')
             } else {
                 document.querySelector('.upbutton').classList.add('upbutton_none')
@@ -94,11 +94,12 @@ export default {
                         class="button cardCount__button">+</button>
                 </div>
 
-                <button @click="deleteProduct(elem.id)" class="button basketpage__item-buttonDelete button">Удалить
+                <button @click.prevent="deleteProduct(elem.id)" class="button basketpage__item-buttonDelete button">Удалить
                     товар</button>
             </div>
         </div>
-        <p class="basketpage__totalPrice">Итоговая сумма: {{ totalPrice }} ₽</p>
+        <p class="basketpage__totalPrice">Итоговая сумма:
+            {{ this.totalPrice }} ₽</p>
 
         <router-link tag="button" to="order" class="basketpage__order button">заказать</router-link>
         <UpButton />

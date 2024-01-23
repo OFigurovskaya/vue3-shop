@@ -1,0 +1,298 @@
+@import './vars.scss';
+
+.menu {
+    grid-column: 3/9;
+
+    &__list {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    &__link {
+        transition: .3s all ease-in-out,
+            .3s outline ease-in-out;
+        -webkit-transition: all .3s;
+        -moz-transition: all .3s;
+        -o-transition: all .3s;
+        font-size: calc($sizeindex * 0.55);
+    }
+
+    &__link:focus-visible {
+        color: $focusLink-color;
+        font-weight: 700;
+        outline: none;
+    }
+
+    &__link:hover {
+        color: $blue-color;
+        font-weight: 700;
+    }
+
+    &__link:active {
+        color: $activeLink-color;
+    }
+}
+
+.logo {
+    grid-column: 1/3;
+    gap: 15px;
+    display: flex;
+}
+
+.tel,
+.mail {
+    transition: .3s color ease-in-out,
+        .3s font-weight ease-in-out,
+        .3s outline ease-in-out;
+    font-size: calc($sizeindex * 0.45);
+}
+
+.tel:focus-visible,
+.mail:focus-visible {
+    color: $focusLink-color;
+    font-weight: 700;
+    outline: none;
+}
+
+.tel:hover,
+.mail:hover {
+    color: $blue-color;
+    font-weight: 700;
+}
+
+.tel:active,
+.mail:active {
+    color: $activeLink-color;
+}
+
+.basket,
+.basketImg {
+    outline: none;
+    transition: .3s background-color ease-in-out;
+}
+
+.basket:focus-visible img {
+    outline: none;
+    background-color: $focusLink-color;
+}
+
+.basketImg:focus-visible {
+    background-color: $focusLink-color;
+}
+
+.basket:hover img {
+    background-color: $blue-color;
+}
+
+.basket:active img {
+    background-color: $activeLink-color;
+}
+
+.title {
+    font-size: calc($sizeindex * 2.13);
+    font-weight: 600;
+    line-height: 110%;
+    letter-spacing: 1.1px;
+}
+
+.button {
+    padding: 2vh 1.5vw;
+    width: 15vw;
+    position: relative;
+    background-color: transparent;
+    border: 1px solid $blue-color;
+    font-size: calc($sizeindex * 0.6);
+    font-style: normal;
+    font-weight: 400;
+    color: $blue-color;
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+    transition: .3s all ease-in-out;
+    cursor: pointer;
+    box-shadow: 5px 5px 4px rgba(26, 77, 71, 0.2);
+}
+
+.button:focus-visible {
+    background-color: $focusLink-color;
+    outline: none;
+    color: white;
+}
+
+.button:hover {
+    background-color: $button-hover;
+    outline: none;
+    color: white;
+}
+
+.button:active {
+    background-color: $activeLink-color;
+    outline: none;
+    color: white;
+}
+
+.titleTwo {
+    font-size: calc($sizeindex * 1.55);
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+}
+
+.mb-25 {
+    margin-bottom: 2.5vh;
+}
+
+.mb-20 {
+    margin-bottom: 20vh;
+}
+
+.mt-8 {
+    margin-top: 8vh;
+}
+
+.mb-8 {
+    margin-bottom: 8vh;
+}
+
+.priceBefore {
+    text-decoration: line-through;
+}
+
+.titleThree {
+    font-size: calc($sizeindex * 1);
+    font-style: normal;
+    font-weight: 500;
+    line-height: 140%;
+    letter-spacing: 0.5px;
+}
+
+.breadcrumbs {
+    font-size: calc($sizeindex * 0.55);
+
+
+    &__main {
+        font-weight: 600;
+        transition: 0.3s all ease-in-out;
+    }
+
+    &__main:focus-visible {
+        color: $focusLink-color;
+        font-weight: 700;
+        outline: none;
+    }
+
+    &__main:hover {
+        color: $blue-color;
+        font-weight: 700;
+    }
+
+    &__main:active {
+        color: $activeLink-color;
+    }
+
+    &__products {
+        color: $grey-color;
+        transition: 0.3s all ease-in-out;
+    }
+
+    &__products:focus-visible {
+        color: $focusLink-color;
+        font-weight: 700;
+        outline: none;
+    }
+
+    &__products:hover {
+        color: $blue-color;
+        font-weight: 700;
+    }
+
+    &__products:active {
+        color: $activeLink-color;
+    }
+}
+
+.blockCenter {
+    margin: 0 auto;
+    display: block;
+}
+
+.breadcrumbsCard {
+    display: flex;
+}
+
+.cardproduct__filter-color input[type=radio],
+.cardproduct__filter-sizes input[type=radio] {
+    display: none;
+}
+
+.cardproduct__filter-color label,
+.cardproduct__filter-sizes label {
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    padding-left: 25px;
+    margin-right: 0;
+    line-height: 18px;
+    user-select: none;
+}
+
+.cardproduct__filter-colorvalue:before,
+.cardproduct__filter-sizesvalue::before {
+    content: "";
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: 0;
+    bottom: 1px;
+    border: 1px solid $grey-color;
+    border-radius: 50%;
+    background-color: inherit;
+}
+
+.filter-wrapper {
+    display: flex;
+    width: 16vw;
+    justify-content: space-between;
+}
+
+.cardproduct__filter-sizeslabel {
+    width: 4vw;
+}
+
+
+.cardproduct__filter-sizes label {
+    padding-left: 40px;
+}
+
+
+.cardproduct__filter-colorradio:checked~.cardproduct__filter-colorvalue::before,
+.cardproduct__filter-sizesradio:checked~.cardproduct__filter-sizesvalue::before {
+    border: 3px solid #000;
+}
+
+.cardproduct__filter-sizesvalue:hover {
+    font-weight: 600;
+}
+
+
+.yandex-container {
+    margin: 0 auto;
+    margin-bottom: 5vh;
+}
+
+.cardCount {
+
+    &__button,
+    &__input {
+        width: 3vw;
+        padding: 1vh 1vw;
+        margin-bottom: 1vh;
+    }
+
+
+}
+
+.loadAdd {
+    text-align: center;
+}

@@ -1,29 +1,39 @@
 # vue3-shop
 
-This template should help get you started developing with Vue 3 in Vite.
+Пэт-проект интернет-магазин на Vue 3
 
-## Recommended IDE Setup
+Деплой: https://ofigurovskaya.github.io/vue3-shop/#/
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+Функционал:
 
-## Customize configuration
+При загрузке страницы уходит запрос на сервер за каталогом товаров
+В карточках можно фильтровать товары по:
+цене (от и до)
+категории
+кнопка "применить"
+кнопка "сбросить"
+При переходе на товар открывается страница с описанием товара
+Страница товара: 
+Необходимое количество товара можно добавлять в корзину
+Реализовано меню "хлебные крошки"
+Товар добавляется в корзину с задержкой, в иконке корзины обновляется количество.
+При клике на иконку корзины осуществляется переход в корзину
+Корзина Содержимое корзины сохраняется в LocalStorage по ключу. В корзине можно редактировать количество товаров, удалять товары.
+Сумма соответственно пересчитывается.
+При клике на кнопку "оформить заказ" осуществляется переход на страницу заказа.
+Страница оформления заказа:
+Содержит форму для заполнения пользователем.
+Можно выбрать вариант доставки, сумма пересчитывается с учетов выбранного варианта.
+При отправке формы запускается прелоадер и осуществляется проверка корректностим внесенных данных. Если данные не внесены или внесены некорректно - выводится сообщение. 
+При попытке перехода на несуществующую страницу выводится сообщение о том, что страница не найдена.
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+Стек
 
-## Project Setup
+Vue3, axios, vue-router, vue-yandex-maps, vuex4, sass, vite
 
-```sh
-npm install
-```
+Установка
 
-### Compile and Hot-Reload for Development
+Для запуска на локальной машине необходимо:
+Установить npm зависимости: npm install Запустить из папки project - npm run build
 
-```sh
-npm run dev
-```
 
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
